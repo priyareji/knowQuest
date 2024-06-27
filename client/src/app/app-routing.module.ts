@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InstructorModule } from './modules/instructor/instructor.module';
 
 const routes: Routes = [
+  {path:'',loadChildren:()=>import('./modules/landing/landing.module').then(m=>m.LandingModule)},
   {path:'admin',
     loadChildren:()=>import('./modules/admin/admin.module').then(m=>m.AdminModule)
   },

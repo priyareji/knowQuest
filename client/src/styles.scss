@@ -2,6 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button{
+  background-color:#F59D19;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

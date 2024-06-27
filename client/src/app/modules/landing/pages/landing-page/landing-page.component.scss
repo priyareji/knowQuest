@@ -1,0 +1,32 @@
+
+mat-toolbar{
+  background-color:#F59D19;
+  color:white
+}
+.landing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ebcbb6;
+}
+img {width: 100%;object-fit: fill;}
+.landing-container{
+  background-image: url('../../../../../assets/images/student.avif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 90%;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 20px;
+  text-align: center;
+  opacity: .75;
+}
+button{
+  background-color:#F59D19;
+  margin-left: 120px;
+  color:white;
+}

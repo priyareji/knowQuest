@@ -1,0 +1,46 @@
+<mat-toolbar color="#FFAB40">
+  <span>KnowQuest</span>
+</mat-toolbar>
+
+<div class="landing-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Welcome to KnowQuest</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="login" (ngSubmit)="submit()">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="Ex. pat@example.com"
+          />
+          <!-- <mat-error
+            *ngIf="
+              login.get('email')?.errors && login.get(['email'])?.errors?.email
+            "
+            >Invalid Email</mat-error
+          > -->
+          <mat-error *ngIf="login.get('email')?.errors?.['required']">
+            Email is Required
+          </mat-error>
+          <mat-error *ngIf="login.get('email')?.errors?.['email']">
+            Invalid Email
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-error *ngIf="login.get('password')?.errors">
+            Min length should be 6.
+          </mat-error>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-raised-button type="submit">Log In</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
