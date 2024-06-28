@@ -3,6 +3,7 @@ import databaseConfg from "./configs/db.config";
 import expressConfig from "./configs/express.config";
 import serverConfig from "./configs/server.config";
 import { createServer } from 'http';
+import routesConfig from "./routes/routes";
 
 
 
@@ -19,4 +20,4 @@ expressConfig(app);
 serverConfig(httpServer)
 
 //routes config
-// routesConfig(app)
+routesConfig(app)

@@ -1,9 +1,30 @@
-#ignore nodemdules
+# Node.js dependencies
 node_modules/
-
-
-#ignore .env file
+# Environment variables
 .env
 
-#ignore compiled js files
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+
+# Build artifacts
 dist/
+build/
+
+# Ignore all files in the 'src' directory that match the patterns below
+/src/*.env          # Ignore environment files in src
+/src/**/*.log       # Ignore log files in src
+/src/**/node_modules/ # Ignore node_modules within src
+/src/**/dist/       # Ignore dist directories within src
+/src/**/build/      # Ignore build directories within src
+/src/**/*.tmp       # Ignore temporary files in src
+
+# Specific files and directories to ignore in src
+/src/secrets.json   # Ignore secrets.json in src
+/src/config.js      # Ignore config.js in src
