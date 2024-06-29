@@ -1,6 +1,5 @@
-export interface IUser {
-     //_id?: string;
-    name: string;
+export interface UserState {
+  name: string;
     email: string;
     password: string;
     phonenumber?: number;
@@ -11,4 +10,11 @@ export interface IUser {
     subject?: string;
     mode?: string;
     refreshToken?: string ;
-  }
+}
+
+export interface AuthState{
+  userLoggedIn: boolean,
+  user: UserState | null,
+  loginSuccess: string | null,
+  loginError: string |null
+}

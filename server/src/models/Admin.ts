@@ -17,8 +17,8 @@ adminSchema.methods.isPasswordCorrect = async function (password: string) {
 adminSchema.methods.generateAccessToken = async function ():Promise<string> {
     return jwt.sign(
         {
-            name:this.name,
             _id: this._id,
+            name:this.name,
             email:this.email,
             role:this.role,
                
@@ -38,6 +38,8 @@ adminSchema.methods.generateRefreshToken = async function ():Promise<string>{
     )
 }
 
-export interface AdminDocument extends IUser,Document,IGenerateTokens {}
+export interface AdminDocument extends Document,IUser {
+    
+  }
 
 export const Admin = mongoose.model<AdminDocument>('Admin',adminSchema);

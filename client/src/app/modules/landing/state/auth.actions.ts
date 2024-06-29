@@ -1,12 +1,7 @@
 import { createAction, props } from "@ngrx/store";
+import { UserState } from "src/app/core/models/state.model";
 
-export const LOGIN_START = '[auth page] login start';
-export const LOGIN_SUCCESS = '[auth page] login success';
-export const LOGIN_FAIL = '[auth page] login fail';
+export const loginAction = createAction('[userLogin] click', props<{ email:string,password:string}>())
+export const loginSuccess = createAction('[userLogin] user sucessfully login', props<{ loginSuccess: string, user: UserState,userLoggedIn:boolean}>())
+export const loginFail = createAction('[userLogin] user login failed', props<{ loginError: string, userLoggedIn: boolean }>())
 
-export const loginStart = createAction(
-  LOGIN_START,
-  props<{email:string,password:string}>()
-);
-
-export const loginSuccess = createAction(LOGIN_SUCCESS);

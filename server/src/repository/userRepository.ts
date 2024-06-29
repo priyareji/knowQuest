@@ -18,7 +18,7 @@ export const findUserByEmail=async(email: string): Promise<AdminDocument | Instr
       return null;
     }
   
-    export const findUserById=async(id: string): Promise<AdminDocument | InstructorDocument | StudentDocument | null> => {
+    export const findUserById=async (id: string): Promise<AdminDocument | InstructorDocument | StudentDocument | null> => {
       const admin = await Admin.findById(id).exec();
       if (admin) return admin;
   

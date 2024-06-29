@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'student',
     loadChildren:()=>import('./modules/student/student.module').then(m=>m.StudentModule)
   },
-  {path:'Instructor',
+  {path:'instructor',
     loadChildren:()=>import('./modules/instructor/instructor.module').then(m=>InstructorModule)
   }
 ];

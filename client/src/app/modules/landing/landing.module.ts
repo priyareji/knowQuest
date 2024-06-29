@@ -5,10 +5,10 @@ import { LandingRoutingModule } from './landing-routing.module';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { AUTH_STATE_NAME } from './state/auth.selector';
-import { AuthReducer } from './state/auth.reducer';
+
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/auth.effect';
+import { authReducer } from './state/auth.reducer';
 
 
 
@@ -21,7 +21,7 @@ import { AuthEffects } from './state/auth.effect';
   imports: [
     CommonModule,SharedModule,LandingRoutingModule,FormsModule,ReactiveFormsModule,
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature(AUTH_STATE_NAME,AuthReducer)
+    StoreModule.forFeature('auth',authReducer)
   ]
 })
 export class LandingModule { }

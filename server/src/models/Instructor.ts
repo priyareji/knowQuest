@@ -48,6 +48,8 @@ instructorSchema.methods.generateRefreshToken = async function ():Promise<string
 }
 
 
-export interface InstructorDocument extends IUser,Document,IGenerateTokens{}
+export interface InstructorDocument extends Document,IUser {
+    
+  }
 
 export const Instructor = mongoose.model<InstructorDocument>('Instructor',instructorSchema)

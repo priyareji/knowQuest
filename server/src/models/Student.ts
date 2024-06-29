@@ -46,5 +46,7 @@ studentSchema.methods.generateRefreshToken = async function ():Promise<string>{
     )
 }
 
-export interface StudentDocument extends IUser,Document,IGenerateTokens {}
+export interface StudentDocument extends Document,IUser {
+   
+  }
   export const Student = mongoose.model<StudentDocument>('Student',studentSchema)

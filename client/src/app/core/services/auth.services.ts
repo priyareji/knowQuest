@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, catchError, throwError } from "rxjs";
+import { ApiResponse } from "../models/apiResponse";
   @Injectable({
     providedIn:'root'
   })
@@ -8,8 +9,34 @@ import { Observable } from "rxjs";
     constructor(private http:HttpClient){
 
     }
-    login(email:string,password:string){
+    login(payload: Record<string, string>){
       console.log("hello")
-      return this.http.post('http://localhost:3000/api/auth/login',{email,password})
+      return this.http.post<ApiResponse>('http://localhost:3000/api/v1/auth/login',payload).pipe(
+        catchError((error: HttpErrorResponse) => {
+          const err = {
+            message: error?.error?.errorMessage,
+            statusCode:error.status
+          }
+          return throwError(()=>err)
+        })
+      )
     }
+    removeAccessToken(): void{
+      window.localStorage.removeItem('accessToken')
+    }
+    getAccessToken() {
+      return window.localStorage.getItem('accessToken')
+    }
+    setAccessToken(token: string) {
+      window.localStorage.setItem('accessToken',token)
+    }
+    setRefreshToken( token: string) {
+      window.localStorage.setItem('refreshToken',token)
+    }
+      getRefreshToken() {
+        return window.localStorage.getItem('refreshToken')
+      }
+      removeRefreshToken(): void{
+      window.localStorage.removeItem('refreshToken')
+      }
   }

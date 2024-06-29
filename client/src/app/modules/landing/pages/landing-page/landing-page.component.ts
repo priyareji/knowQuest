@@ -3,7 +3,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/store/app.state';
-import { loginStart } from '../../state/auth.actions';
+import { loginAction } from '../../state/auth.actions';
 
 @Component({
   selector: 'app-landing-page',
@@ -21,9 +21,8 @@ export class LandingPageComponent {
 store=inject(Store<AppState>)
   submit(){
     console.log(this.login.value)
-    const email = this.login.value.email;
-    const password= this.login.value.password;
-  this.store.dispatch(loginStart({email,password}))
+    const payload = this.login.value as Record<string, string>;
+  this.store.dispatch(loginAction(payload as any))
     }
 
 }
