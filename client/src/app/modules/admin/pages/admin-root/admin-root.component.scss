@@ -1,0 +1,155 @@
+
+.header {
+  padding: 12px;
+  background-color:#F59D19!important;
+
+
+  .logo-container {
+    height: 40px;
+    width: 70px;
+    // background: url("../../../../../assets/images/logos/Logo.png");
+  }
+}
+.content {
+  overflow: auto;
+
+  min-height: calc(100vh - 68px);
+}
+.icon-container {
+
+  width: 45px;
+  transition: 300ms;
+  .icon {
+    // margin: 30px 12px;
+    height: 40px;
+    width: 40px;
+    margin: 18px 5px;
+    background-size: contain !important;
+    background-position: 50% 50%;
+    background-repeat: no-repeat !important;
+    transition: 300ms;
+    cursor: pointer;
+  }
+}
+
+.hide-icon-container {
+  width: 0;
+}
+
+// @include media-breakpoint-up(sm) {
+//   .icon-container {
+//     width: 80px;
+//   }
+// }
+
+#dashboard {
+  background: url("../../../../../assets/icons/ICO-1-Dashboard.svg");
+}
+#content-management {
+  background: url("../../../../../assets/icons/ICO-2-Content-Management.svg");
+}
+#courses {
+  background: url("../../../../../assets/icons/ICO-3-Education.svg");
+}
+#batches {
+  background: url("../../../../../assets/icons/ICO-4-Batches.svg");
+}
+#teacher {
+  background: url("../../../../../assets/icons/ICO-5-Teacher.svg");
+}
+#books {
+  background: url("../../../../../assets/icons/ICO-6-Books.svg");
+}
+#settings {
+  background: url("../../../../../assets/icons/ICO-7-Settings.svg");
+}
+#report {
+  background: url("../../../../../assets/icons/ICO-10-Report.svg");
+}
+
+#dashboard:hover {
+  background: url("../../../../../assets/icons/ICO-1-Dashboard-Active.svg");
+}
+#content-management:hover {
+  background: url("../../../../../assets/icons/ICO-2-Content-Management-Active.svg");
+}
+#courses:hover {
+  background: url("../../../../../assets/icons/ICO-3-Education-Active.svg");
+}
+#batches:hover {
+  background: url("../../../../../assets/icons/ICO-4-Batches-Active.svg");
+}
+#teacher:hover {
+  background: url("../../../../../assets/icons/ICO-5-Teacher-Active.svg");
+}
+#books:hover {
+  background: url("../../../../../assets/icons/ICO-6-Books-Active.svg");
+}
+#settings:hover {
+  background: url("../../../../../assets/icons/ICO-7-Settings-Active.svg");
+}
+#report:hover {
+  background: url("../../../../../assets/icons/ICO-10-Report-Active.svg");
+}
+
+.sidepanel {
+  width: 0;
+  opacity: 0;
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+  top: 0;
+  left: 0px;
+  // left: 80px;
+  background-color: #e98f08 !important;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  padding: 0px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #f1f1f1;
+  display: block;
+  margin-top: 16px;
+  transition: 0.3s;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: -7px;
+  right: 8px;
+  font-size: 35px;
+}
+
+.open-panel {
+  width: 250px !important;
+  opacity: 1;
+  padding: 12px;
+  padding: 23px;
+  padding-top: 60px;
+}
+
+.sidepanel .mat-divider {
+  margin: 4px 0px 6px 0;
+  border-color: white;
+}
+.sidepanel h3 {
+  font-size: 21px;
+  color: #f1f1f1;
+  margin-left: 5px;
+}
+
+.content-body{
+   max-width: 100% !important;
+  overflow-y: hidden;
+  background-color: #efeded;
+}
+
+.position {
+  position: relative;
+  bottom: 1px;
+}

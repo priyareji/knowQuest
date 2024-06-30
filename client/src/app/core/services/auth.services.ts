@@ -6,12 +6,13 @@ import { ApiResponse } from "../models/apiResponse";
     providedIn:'root'
   })
   export class AuthService{
+    private apiUrl = 'http://localhost:3000/api/v1';
     constructor(private http:HttpClient){
 
     }
     login(payload: Record<string, string>){
       console.log("hello")
-      return this.http.post<ApiResponse>('http://localhost:3000/api/v1/auth/login',payload).pipe(
+      return this.http.post<ApiResponse>(`${this.apiUrl}/auth/login`,payload).pipe(
         catchError((error: HttpErrorResponse) => {
           const err = {
             message: error?.error?.errorMessage,
@@ -21,6 +22,33 @@ import { ApiResponse } from "../models/apiResponse";
         })
       )
     }
+    createStudent(payload:Record<string,string>){
+      return this.http.post<ApiResponse>(`${this.apiUrl}/admin/createStudent`,payload)
+    }
+    createInstructor(payload:Record<string,string>){
+      return this.http.post<ApiResponse>(`${this.apiUrl}/admin/createInstructor`,payload)
+    }
+    getAllInstructors(): Observable<any> {
+      return this.http.get(`${this.apiUrl}/admin/getAllInstructors`);
+    }
+    getAllStudents(): Observable<any> {
+      return this.http.get(`${this.apiUrl}/admin/getAllStudents`);
+    }
+    getInstructorById(id: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/admin/get-instructor/${id}`);
+    }
+
+    updateInstructor(id: string, instructorData: any): Observable<any> {
+      return this.http.put(`${this.apiUrl}/admin/edit-instructor/${id}`, instructorData);
+    }
+    getStudentById(id: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/admin/get-student/${id}`);
+    }
+
+    updateStudent(id: string, studentData: any): Observable<any> {
+      return this.http.put(`${this.apiUrl}/admin/edit-student/${id}`, studentData);
+    }
+
     removeAccessToken(): void{
       window.localStorage.removeItem('accessToken')
     }

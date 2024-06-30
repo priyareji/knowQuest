@@ -1,4 +1,5 @@
-import { createAdmin, createInstructor, createStudent } from "../repository/adminRepository";
+//import { getAllInstructor, getAllStudent } from "../controller/admin.controller";
+import { createAdmin, createInstructor, createStudent, findInstructorById, findStudentById, getAllinstructors, getAllstudents } from "../repository/adminRepository";
 import { findUserByEmail } from "../repository/userRepository";
 import HttpStatus from "../types/constants/http-statuscode";
 import { IUser } from "../types/model/IUser.interface";
@@ -37,3 +38,44 @@ export const register=async (userData:IUser):Promise<IUser>=>{
       }
       return newUser
 }
+
+
+export const getAllInstructors=async():Promise<IUser[]> =>{
+  return await getAllinstructors()
+}
+export const getAllStudents=async():Promise<IUser[]> => {
+  return await getAllstudents()
+}
+export const editInstructorById = async (id: string, instructorData: Partial<IUser>): Promise<IUser> => {
+  const instructor = await findInstructorById(id);
+  if (!instructor) {
+    throw new Error('Instructor not found');
+  }
+
+  // Update instructor fields
+  Object.assign(instructor, instructorData);
+  await instructor.save();
+  return instructor;
+}
+export const editStudentById = async (id: string, studentData: Partial<IUser>): Promise<IUser> => {
+  const student = await findStudentById(id);
+  if (!student) {
+    throw new Error('Instructor not found');
+  }
+
+  // Update instructor fields
+  Object.assign(student, studentData);
+  await student.save();
+  return student;
+}
+
+export const getInstructorById = async (id: string): Promise<IUser | null> => {
+  const instructor = await findInstructorById(id);
+  return instructor
+}
+export const getStudentById = async (id: string): Promise<IUser | null> => {
+  const student = await findStudentById(id);
+  return student
+}
+
+

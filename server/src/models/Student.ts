@@ -28,6 +28,7 @@ studentSchema.methods.generateAccessToken = async function ():Promise<string> {
             phonenumber:this.phonenumber,
             course:this.course,
             role: this.role,
+            batch:this.batch,
             mode:this.mode
             
         },

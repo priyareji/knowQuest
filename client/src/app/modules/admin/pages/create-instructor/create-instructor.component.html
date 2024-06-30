@@ -1,0 +1,78 @@
+<div class="sub-header">
+  <h2>Instructor</h2>
+</div>
+
+<div class="content-container">
+  <mat-card class="form-card">
+    <h3>{{ isEditMode ? "Update" : "Create" }} Instructor</h3>
+
+    <form
+      [formGroup]="createInstructorForm"
+      (ngSubmit)="onSubmit()"
+      fxLayout="column"
+    >
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex="50" fxFlex.gt-sm="40%">
+          <mat-label>Name</mat-label>
+          <input name="name" matInput type="text" formControlName="name" />
+        </mat-form-field>
+        &nbsp; &nbsp;&nbsp; &nbsp;
+        <mat-form-field fxFlex="50" fxFlex.gt-sm="40%">
+          <mat-label>email</mat-label>
+          <input name="email" matInput type="email" formControlName="email" />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
+          <mat-label>Password</mat-label>
+          <input
+            name="password"
+            matInput
+            type="password"
+            formControlName="password"
+          />
+        </mat-form-field>
+        &nbsp; &nbsp;&nbsp; &nbsp;
+        <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
+          <mat-label>Phone Number</mat-label>
+          <input
+            name="phonenumber"
+            matInput
+            type="text"
+            formControlName="phonenumber"
+          />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
+          <mat-label>Course</mat-label>
+          <input name="course" matInput type="text" formControlName="course" />
+        </mat-form-field>
+        &nbsp; &nbsp;&nbsp; &nbsp;
+        <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
+          <mat-label>Mode</mat-label>
+          <input name="mode" matInput type="text" formControlName="mode" />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
+          <mat-label>batch</mat-label>
+          <input name="mode" matInput type="text" formControlName="batch" />
+        </mat-form-field>
+      </div>
+
+      <div class="mt-2" fxLayout="row " fxLayoutAlign="end">
+        <button
+          mat-raised-button
+          class="submit-button"
+          [disabled]="createInstructorForm.invalid"
+          type="submit"
+        >
+          {{ isEditMode ? "Update" : "Create" }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

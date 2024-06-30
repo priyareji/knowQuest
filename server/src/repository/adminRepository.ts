@@ -16,3 +16,18 @@ import {IUser} from '../types/model/IUser.interface';
         const student = new Student(studentData);
         return await student.save();
     }
+
+    export const getAllinstructors=async(): Promise<InstructorDocument[]> => {
+        return await Instructor.find({})
+      }
+      export const getAllstudents=async(): Promise<StudentDocument[]> => {
+        return await Student.find({})
+      }
+      export const findInstructorById = async(id:string):Promise<InstructorDocument | null> =>{
+        console.log(`Finding instructor with ID: ${id}`)
+            return await Instructor.findById(id)
+            
+      }
+      export const findStudentById = async(id:string):Promise<StudentDocument | null> =>{
+        return await Student.findById(id)
+  }

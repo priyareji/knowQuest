@@ -1,0 +1,219 @@
+<div class="h-100" fxLayout="column">
+  <div
+    class="header"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    fxFlex="20%"
+  >
+    <div class="logo-container"></div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon class="position">account_circle</mat-icon>
+        Admin
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Account Settings</button>
+        <mat-divider> </mat-divider>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+      <!-- <button mat-raised-button (click)="logout()">LogOut</button> -->
+      <mat-icon fxHide.gt-sm (click)="hideIconContainer = !hideIconContainer"
+        >menu</mat-icon
+      >
+    </div>
+  </div>
+
+  <div class="content" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div
+      class="icon-container"
+      [ngClass]="{ 'hide-icon-container': hideIconContainer }"
+      fxLayout="column"
+      fxLayoutAlign="start center"
+    >
+      <div
+        matTooltip="Dashboard"
+        class="icon"
+        id="dashboard"
+        (click)="onClickLink('dashboard')"
+      ></div>
+      <div
+        matTooltip="Students"
+        class="icon"
+        id="content-management"
+        (click)="isStudentPanelOpen = !isStudentPanelOpen"
+      ></div>
+      <div
+        matTooltip="Courses"
+        class="icon"
+        id="courses"
+        (click)="isCoursesPanelOpen = !isCoursesPanelOpen"
+      ></div>
+      <div
+        matTooltip="Batches"
+        class="icon"
+        id="batches"
+        (click)="isBatchesPanelOpen = !isBatchesPanelOpen"
+      ></div>
+      <div
+        matTooltip="Instructors"
+        class="icon"
+        id="teacher"
+        (click)="isInstructorsPanelOpen = !isInstructorsPanelOpen"
+      ></div>
+      <div
+        matTooltip="Subjects"
+        class="icon"
+        id="books"
+        (click)="isSubjectsPanelOpen = !isSubjectsPanelOpen"
+      ></div>
+      <div
+        matTooltip="Report"
+        class="icon"
+        id="report"
+        (click)="isReportPanelOpen = !isReportPanelOpen"
+      ></div>
+      <div
+        matTooltip="Subjects"
+        class="icon"
+        id="settings"
+        (click)="isSettingsPanelOpen = !isSettingsPanelOpen"
+      ></div>
+    </div>
+    <div class="content-body" fxFlex>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- Student MANAGEMENT PANEL -->
+<div
+  id="content-management-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isStudentPanelOpen }"
+>
+  <h2 class="text-white">Create Student</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isStudentPanelOpen = !isStudentPanelOpen"
+    >×</a
+  >
+  <a (click)="onClickLink('create-student')">Create Student</a>
+  <a (click)="onClickLink('manage-student')">Manage Student</a>
+</div>
+
+<!-- COURSES PANEL -->
+<div
+  id="courses-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isCoursesPanelOpen }"
+>
+  <h2 class="text-white">Courses</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isCoursesPanelOpen = !isCoursesPanelOpen"
+    >×</a
+  >
+  <a (click)="onClickLink('create-course')">Create Course</a>
+  <a (click)="onClickLink('manage-courses')">Manage Courses</a>
+</div>
+
+<!-- INSTRUCTORS PANEL -->
+<div
+  id="instructors-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isInstructorsPanelOpen }"
+>
+  <h2 class="text-white">Instructors</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isInstructorsPanelOpen = !isInstructorsPanelOpen"
+    >×</a
+  >
+  <a (click)="onClickLink('create-instructor')">Create Instructor</a>
+  <a (click)="onClickLink('manage-instructors')">Manage Instructors</a>
+</div>
+
+<!-- BATCHES PANEL -->
+<div
+  id="instructors-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isBatchesPanelOpen }"
+>
+  <h2 class="text-white">Batches</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isBatchesPanelOpen = !isBatchesPanelOpen"
+    >×</a
+  >
+  <a (click)="onClickLink('create-batch')">Create Batch</a>
+  <a (click)="onClickLink('manage-batches')">Manage Batches</a>
+</div>
+
+<!-- SUBJECTS PANEL -->
+<div
+  id="instructors-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isSubjectsPanelOpen }"
+>
+  <h2 class="text-white">Subjects</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isSubjectsPanelOpen = !isSubjectsPanelOpen"
+    >×</a
+  >
+  <a (click)="onClickLink('create-subject')">Create Subject</a>
+  <a (click)="onClickLink('manage-subjects')">Manage Subjects</a>
+</div>
+<!-- REPORT PANEL -->
+<div
+  id="instructors-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isReportPanelOpen }"
+>
+  <h2 class="text-white">Report</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isReportPanelOpen = !isReportPanelOpen"
+    >×</a
+  >
+  <a (click)="onClickLink('students-list')">Students List</a>
+  <a (click)="onClickLink('instructor-list')">Instructors List</a>
+</div>
+<!-- SETTINGS PANEL -->
+<div
+  id="instructors-panel"
+  class="sidepanel"
+  [ngClass]="{ 'open-panel': isSettingsPanelOpen }"
+>
+  <h2 class="text-white">Settings</h2>
+  <a
+    href="javascript:void(0)"
+    class="closebtn"
+    (click)="isSettingsPanelOpen = !isSettingsPanelOpen"
+    >×</a
+  >
+  <mat-divider></mat-divider>
+
+  <h3 class="text-white ml-2">Mode</h3>
+  <a (click)="onClickLink('create-mode')">Create Mode</a>
+  <a (click)="onClickLink('manage-modes')">Manage Modes</a>
+  <mat-divider></mat-divider>
+
+  <h3 class="text-white pl-2">Schedule</h3>
+  <a (click)="onClickLink('regular-schedule')">Regular Schedule</a>
+  <a (click)="onClickLink('exam-schedules')">Exam Schedules</a>
+  <a (click)="onClickLink('manage-schedules')">Manage Schedules</a>
+  <mat-divider></mat-divider>
+
+  <!-- <h3 class="text-white pl-2">Live Class</h3>
+  <a (click)="onClickLink('create-liveclass')">Create Live Class</a>
+  <a (click)="onClickLink('manage-liveclass')">Manage Live Class</a>
+
+  <mat-divider></mat-divider> -->
+</div>
