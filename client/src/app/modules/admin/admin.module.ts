@@ -12,6 +12,11 @@ import { ManageInstructorComponent } from './pages/manage-instructor/manage-inst
 import { ManageSubjectComponent } from './pages/manage-subject/manage-subject.component';
 import { ManageCourseComponent } from './pages/manage-course/manage-course.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateModeComponent } from './pages/create-mode/create-mode.component';
+import { ManageModeComponent } from './pages/manage-mode/manage-mode.component';
+import { CreateBranchComponent } from './pages/create-branch/create-branch.component';
+import { ManageBranchComponent } from './pages/manage-branch/manage-branch.component';
+
 
 
 
@@ -25,7 +30,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ManageStudentComponent,
     ManageInstructorComponent,
     ManageSubjectComponent,
-    ManageCourseComponent
+    ManageCourseComponent,
+    CreateModeComponent,
+    ManageModeComponent,
+    CreateBranchComponent,
+    ManageBranchComponent
   ],
   imports: [
     CommonModule,SharedModule,AdminRoutingModule,FormsModule,ReactiveFormsModule,

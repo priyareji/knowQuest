@@ -30,6 +30,21 @@ export const findUserByEmail=async(email: string): Promise<AdminDocument | Instr
   
       return null;
     }
- 
+
+
+    // export const updateUserRefreshToken = async (userId: string, refreshToken: string): Promise<void> {
+
+
+      // if( admin) await Admin.findByIdAndUpdate(userId, { refreshToken });
+      
+  
+      // const instructor = await Instructor.findByIdAndUpdate(userId, { refreshToken });
+      // if (instructor) return instructor;
+  
+      // const student = await StudentfindByIdAndUpdate(userId, { refreshToken });
+      // if (student) return student;
+  
+      // return null
+  // }
 
 

@@ -1,22 +1,20 @@
-
+@import "../../../../../styles/global/includes";
 .header {
   padding: 12px;
-  background-color:#F59D19!important;
-
 
   .logo-container {
     height: 40px;
     width: 70px;
-    // background: url("../../../../../assets/images/logos/Logo.png");
+
   }
 }
 .content {
   overflow: auto;
-
   min-height: calc(100vh - 68px);
+  display: flex;
+  flex-direction: row;
 }
 .icon-container {
-
   width: 45px;
   transition: 300ms;
   .icon {
@@ -36,11 +34,11 @@
   width: 0;
 }
 
-// @include media-breakpoint-up(sm) {
-//   .icon-container {
-//     width: 80px;
-//   }
-// }
+@include media-breakpoint-up(sm) {
+  .icon-container {
+    width: 80px;
+  }
+}
 
 #dashboard {
   background: url("../../../../../assets/icons/ICO-1-Dashboard.svg");
@@ -101,7 +99,7 @@
   top: 0;
   left: 0px;
   // left: 80px;
-  background-color: #e98f08 !important;
+  background-color: $primary;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -143,10 +141,10 @@
   margin-left: 5px;
 }
 
-.content-body{
-   max-width: 100% !important;
+.max-90 {
+  max-width: 100% !important;
   overflow-y: hidden;
-  background-color: #efeded;
+  flex-grow: 1;
 }
 
 .position {

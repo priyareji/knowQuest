@@ -1,10 +1,12 @@
+import { UserRolesEnum } from "../constants/user-role-enum";
+
 export interface IUser {
      //_id?: string;
     name: string;
     email: string;
     password: string;
     phonenumber?: number;
-    role: 'admin' | 'instructor' | 'student';
+    role:string;
     isAdmin?: boolean;
     course?: string;
     batch?: string;

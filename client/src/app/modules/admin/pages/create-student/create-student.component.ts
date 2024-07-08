@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ROUTES } from 'src/app/app-routes';
 import { AuthService } from 'src/app/core/services/auth.services';
 
 @Component({
@@ -51,12 +52,13 @@ export class CreateStudentComponent implements OnInit {
       const payload = this.createStudentForm.value;
       if (this.isEditMode && this.studentId) {
         this.authService.updateStudent(this.studentId, payload).subscribe(() => {
-          this.router.navigate(['admin', 'manage-instructors']);
+          this.router.navigate(ROUTES.ADMIN.MANAGE_STUDENT);
         });
       } else {
       this.authService.createStudent(payload).
-        subscribe((data: any) => {
-          this.router.navigate(['admin', 'manage-student'])
+        subscribe((data:any) => {
+          console.log(data,"datta")
+          this.router.navigate(ROUTES.ADMIN.MANAGE_STUDENT);
     })
 
   }

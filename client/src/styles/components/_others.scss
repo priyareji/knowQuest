@@ -1,0 +1,115 @@
+.text-normal {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.sub-header {
+  padding: 4px 16px;
+  background-color: $grey-header !important;
+  h2 {
+    color: $sub-header-color;
+    margin-bottom: 0;
+  }
+}
+
+.content-container {
+  max-height: 78vh;
+  overflow-y: auto;
+  padding: 1.3rem;
+  // margin-left: 3px;
+}
+
+/* Works on Firefox */
+.content-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0) rgba(131, 131, 135, 0.345);
+}
+
+/* Works on Chrome, Edge, and Safari */
+.content-container::-webkit-scrollbar {
+  width: 2px;
+}
+
+.content-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content-container::-webkit-scrollbar-thumb {
+  background-color: rgba(131, 131, 135, 0.345);
+  border-radius: 1px;
+  // border: 3px solid orange;
+}
+
+.form-card {
+  width: auto;
+  min-width: auto;
+  max-width: 800px;
+  padding: 2rem !important;
+  margin-top: 0rem;
+  margin-left: auto;
+  margin-right: auto;
+  // background: $grey-card;
+}
+
+@include media-breakpoint-up(sm) {
+  .form-card {
+    min-width: 300px;
+  }
+}
+
+.text-caption {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  background-color: transparent !important;
+}
+
+textarea {
+  background: transparent;
+  resize: none !important;
+}
+
+.alert-primary {
+  background-color: $primary;
+  color: #fff;
+}
+.alert-accent {
+  background-color: $accent;
+  color: #fff;
+}
+.alert-red {
+  background-color: $red;
+  color: $alert;
+  font-weight: 600;
+}
+.alert-orange {
+  background-color: $alert;
+  color: #222222;
+}
+.student-sub-header {
+  padding: 4px 16px;
+  background-color: #e98f08 !important;
+  h2 {
+    color: $grey-card;
+    margin-bottom: 0;
+  }
+}
+
+.landing-header {
+  padding: 12px;
+
+  .logo-container {
+    height: 40px;
+    width: 69px;
+    //background: url("../../assets/images/logos/Logo.png");
+  }
+}
+/********************margin top and bottom for card in sm*********************************************/
+
+// @include media-breakpoint-down(sm) {
+//   .card-margin-responsiveness {
+//     margin: 14px 0px 14px 0px !important;
+//   }
+// }

@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="content" fxLayout="row wrap" fxLayoutAlign="space-between">
+  <div class="content" fxLayout="row">
     <div
       class="icon-container"
       [ngClass]="{ 'hide-icon-container': hideIconContainer }"
@@ -79,7 +79,7 @@
         (click)="isSettingsPanelOpen = !isSettingsPanelOpen"
       ></div>
     </div>
-    <div class="content-body" fxFlex>
+    <div class="bg-grey-body max-90" fxFlex>
       <router-outlet></router-outlet>
     </div>
   </div>
@@ -149,7 +149,7 @@
     (click)="isBatchesPanelOpen = !isBatchesPanelOpen"
     >×</a
   >
-  <a (click)="onClickLink('create-batch')">Create Batch</a>
+  <a (click)="onClickLink('create-batches')">Create Batch</a>
   <a (click)="onClickLink('manage-batches')">Manage Batches</a>
 </div>
 

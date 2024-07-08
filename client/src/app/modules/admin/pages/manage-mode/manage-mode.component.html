@@ -1,0 +1,47 @@
+<div class="sub-header">
+  <h2>Manage Instructors</h2>
+</div>
+<div class="content-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="modeName">
+      <th mat-header-cell *matHeaderCellDef>modeName</th>
+      <td mat-cell *matCellDef="let element">{{ element.modeName }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <!-- <ng-container matColumnDef="Phone Number">
+      <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+      <td mat-cell *matCellDef="let element">{{ element.phonenumber }}</td>
+    </ng-container> -->
+
+    //Symbol Column
+    <!-- <ng-container matColumnDef="Batch">
+      <th mat-header-cell *matHeaderCellDef>Batch</th>
+      <td mat-cell *matCellDef="let element">{{ element.batch }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Course">
+      <th mat-header-cell *matHeaderCellDef>Course</th>
+      <td mat-cell *matCellDef="let element">{{ element.course }}</td>
+    </ng-container> -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="onClickDelete(element._id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['modeName', 'action']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['modeName', 'action']"></tr>
+  </table>
+</div>

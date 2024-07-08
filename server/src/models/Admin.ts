@@ -3,12 +3,13 @@ import {IUser} from '../types/model/IUser.interface';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import configKey from "../configs/configkeys";
+import { UserRolesEnum } from '../types/constants/user-role-enum';
 
 const adminSchema:Schema = new Schema({
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
-    role:{type:String,required:true,default:'admin'},
+    role:{type:String,required:true,default: UserRolesEnum.ADMIN},
     refreshToken: { type: String }
 })
 adminSchema.methods.isPasswordCorrect = async function (password: string) {

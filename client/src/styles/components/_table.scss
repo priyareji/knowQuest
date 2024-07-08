@@ -1,0 +1,39 @@
+@import "../global/includes";
+.mat-header-cell {
+  background: #f59d19;
+}
+
+tr.mat-header-row {
+  height: 40px !important;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  border-left: solid 0.4px rgba(0, 0, 0, 0.12) !important;
+  padding: 3px 12px !important;
+}
+
+.table-responsive {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow-y: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  border: 1px solid #ddd;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0) rgba(131, 131, 135, 0.345);
+}
+
+/* Works on Chrome, Edge, and Safari */
+.table-responsive::-webkit-scrollbar {
+  width: 2px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: rgba(131, 131, 135, 0.345);
+  border-radius: 1px;
+}

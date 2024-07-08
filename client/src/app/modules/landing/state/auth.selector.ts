@@ -9,3 +9,8 @@ export const loginSuccessState = (state: AppState) => state.auth.loginSuccess;
 export const selectLoginSucessMessage = createSelector(
     loginSuccessState,(state)=> state
 )
+export const loginFailState = (state: AppState) => state.auth.loginError
+export const selectLoginErrorMessage = createSelector(
+    loginFailState,
+    (state)=> state
+)

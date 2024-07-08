@@ -6,9 +6,11 @@ import { AuthService } from "src/app/core/services/auth.services";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/shared/store/app.state";
 import { Router } from "@angular/router";
-import { loginAction, loginFail, loginSuccess } from "./auth.actions";
+import { loginAction, loginFail, loginSuccess, logoutFailed, logoutSuccess,logout } from "./auth.actions";
 import { UserState } from "src/app/core/models/state.model";
 import { of } from "rxjs";
+import { ApiResponse } from "src/app/core/models/apiResponse";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
   export class AuthEffects{
@@ -29,11 +31,19 @@ import { of } from "rxjs";
                       }
                       if (response.statusCode === 200) {
                           console.log(response);
-                          this.authService.setAccessToken(response.data?.accessToken as string)
-                          this.authService.setRefreshToken(response.data?.refreshToken as string)
-                          if(response.data?.user?.role==='admin')this.router.navigate(['admin'])
-                            else if(response.data?.user?.role==='student')this.router.navigate(['student'])
-                            else if(response.data?.user?.role==='instructor')this.router.navigate(['instructor'])
+
+                          if(response.data?.user?.role==='ADMIN'){
+                            this.authService.setAccessToken(response.data?.accessToken as string)
+                            this.authService.setRefreshToken(response.data?.refreshToken as string)
+                            this.router.navigate(['admin'])}
+                            else if(response.data?.user?.role==='STUDENT'){
+                              this.authService.setAccessToken(response.data?.accessToken as string)
+                              this.authService.setRefreshToken(response.data?.refreshToken as string)
+                              this.router.navigate(['student'])}
+                            else if(response.data?.user?.role==='INSTRUCTOR'){
+                              this.authService.setAccessToken(response.data?.accessToken as string)
+                              this.authService.setRefreshToken(response.data?.refreshToken as string)
+                              this.router.navigate(['instructor'])}
                           return loginSuccess(props)
                       }
                       throw new Error("Something went wrong")
@@ -49,4 +59,27 @@ import { of } from "rxjs";
           })
       )
   )
+
+  logoutUser$ = createEffect(() => {
+    return this.action$.pipe(
+        ofType(logout),
+        switchMap(() => {
+            return this.authService.userLogout().pipe(
+                map((response: ApiResponse) => {
+                    if(response.statusCode ===200){
+                        this.authService.removeAccessToken();
+                        this.authService.removeRefreshToken();
+                       this.router.navigate(['/landingpage'])
+                        return logoutSuccess()
+                    }
+                    throw new Error("logout error ")
+                }),
+                catchError((error: HttpErrorResponse) => {
+                    return of(logoutFailed())
+                })
+            )
+        })
+    )
+})
+
 }

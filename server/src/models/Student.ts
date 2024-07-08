@@ -3,6 +3,7 @@ import {IUser} from '../types/model/IUser.interface';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import configKey from "../configs/configkeys";
+import { UserRolesEnum } from '../types/constants/user-role-enum';
 
 const studentSchema:Schema = new Schema({
     name:{type:String,required:true},
@@ -10,7 +11,7 @@ const studentSchema:Schema = new Schema({
     password:{type:String,required:true},
     phonenumber:{type:String},
     course:{type:String},
-    role:{type:String,required:true,default:'student'},
+    role:{type:String,required:true, default: UserRolesEnum.STUDENT},
     mode:{type:String},
     refreshToken: { type: String }
 

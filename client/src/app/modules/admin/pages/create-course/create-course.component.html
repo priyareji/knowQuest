@@ -1,1 +1,30 @@
-<p>create-course works!</p>
+<div class="sub-header">
+  <h2>Batch</h2>
+</div>
+
+<div class="content-container">
+  <mat-card class="form-card">
+    <h2>Create Course</h2>
+    <form [formGroup]="createCourseFormGroup" fxLayout="row">
+      <div fxLayout="row">
+        <mat-form-field fxFlex="100">
+          <mat-label>Name</mat-label>
+          <input formControlName="courseName" matInput type="text" />
+          <mat-error>Course name is required</mat-error>
+        </mat-form-field>
+        &nbsp; &nbsp;&nbsp; &nbsp;
+      </div>
+      <div fxLayout="row">
+        <mat-form-field fxFlex="100">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="mt-2" fxLayoutAlign="end">
+        <button mat-raised-button color="primary" (click)="createCourse()">
+          Create
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

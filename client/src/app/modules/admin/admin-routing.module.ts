@@ -7,12 +7,19 @@ import { CreateCourseComponent } from './pages/create-course/create-course.compo
 import { ManageCourseComponent } from './pages/manage-course/manage-course.component';
 import { CreateStudentComponent } from './pages/create-student/create-student.component';
 import { ManageStudentComponent } from './pages/manage-student/manage-student.component';
+import { userOnlyGuard } from 'src/app/core/routegurds/useronly.guard';
+import { CreateModeComponent } from './pages/create-mode/create-mode.component';
+import { ManageModeComponent } from './pages/manage-mode/manage-mode.component';
+import { CreateBranchComponent } from './pages/create-branch/create-branch.component';
+import { ManageBranchComponent } from './pages/manage-branch/manage-branch.component';
+import { CreateSubjectComponent } from './pages/create-subject/create-subject.component';
+import { ManageSubjectComponent } from './pages/manage-subject/manage-subject.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminRootComponent,
+    component: AdminRootComponent,canActivate:[userOnlyGuard],
     children: [
       {
         path: 'create-student',
@@ -50,6 +57,29 @@ const routes: Routes = [
         path: 'manage-courses',
         component: ManageCourseComponent,
       },
+    {
+      path:'create-mode',
+      component:CreateModeComponent
+    },
+    {
+      path:'manage-mode',
+      component:ManageModeComponent
+    },
+    {
+      path:'create-batches',
+      component:CreateBranchComponent
+    },
+    {
+      path:'manage-batches',
+      component:ManageBranchComponent
+    },{
+      path:'create-subject',
+      component:CreateSubjectComponent
+    },
+    {
+      path:'manage-subject',
+      component:ManageSubjectComponent
+    }
 
     ]
   }

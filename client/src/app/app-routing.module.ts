@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InstructorModule } from './modules/instructor/instructor.module';
+import { LoginGuard } from './core/routegurds/login.guard';
 
 const routes: Routes = [
-  {path:'',loadChildren:()=>import('./modules/landing/landing.module').then(m=>m.LandingModule)},
+  {path:'',loadChildren:()=>import('./modules/landing/landing.module').then(m=>m.LandingModule), canActivate: [LoginGuard]},
   {path:'admin',
     loadChildren:()=>import('./modules/admin/admin.module').then(m=>m.AdminModule)
   },

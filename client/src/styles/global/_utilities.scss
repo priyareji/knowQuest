@@ -1,0 +1,326 @@
+// stylelint-disable declaration-no-important
+
+// Align
+
+.align-baseline    { vertical-align: baseline !important; } // Browser default
+.align-top         { vertical-align: top !important; }
+.align-middle      { vertical-align: middle !important; }
+.align-bottom      { vertical-align: bottom !important; }
+.align-text-bottom { vertical-align: text-bottom !important; }
+.align-text-top    { vertical-align: text-top !important; }
+
+// Border
+
+// stylelint-disable property-blacklist, declaration-no-important
+
+//
+// Border
+//
+
+.border         { border: $border-width solid $border-color !important; }
+.border-top     { border-top: $border-width solid $border-color !important; }
+.border-right   { border-right: $border-width solid $border-color !important; }
+.border-bottom  { border-bottom: $border-width solid $border-color !important; }
+.border-left    { border-left: $border-width solid $border-color !important; }
+
+.border-0        { border: 0 !important; }
+.border-top-0    { border-top: 0 !important; }
+.border-right-0  { border-right: 0 !important; }
+.border-bottom-0 { border-bottom: 0 !important; }
+.border-left-0   { border-left: 0 !important; }
+
+@each $color, $value in $theme-colors {
+  .border-#{$color} {
+    border-color: $value !important;
+  }
+}
+
+.border-white {
+  border-color: $white !important;
+}
+
+
+//
+// Border-radius
+//
+
+.rounded-sm {
+  border-radius: $border-radius-sm !important;
+}
+
+.rounded {
+  border-radius: $border-radius !important;
+}
+
+.rounded-top {
+  border-top-left-radius: $border-radius !important;
+  border-top-right-radius: $border-radius !important;
+}
+
+.rounded-right {
+  border-top-right-radius: $border-radius !important;
+  border-bottom-right-radius: $border-radius !important;
+}
+
+.rounded-bottom {
+  border-bottom-right-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
+}
+
+.rounded-left {
+  border-top-left-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
+}
+
+.rounded-lg {
+  border-radius: $border-radius-lg !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: $rounded-pill !important;
+}
+
+.rounded-0 {
+  border-radius: 0 !important;
+}
+
+// Clearfix
+
+.clearfix {
+  @include clearfix();
+}
+
+
+
+// Margin and Padding
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (margin: m, padding: p) {
+      @each $size, $length in $spacers {
+        .#{$abbrev}#{$infix}-#{$size} { #{$prop}: $length !important; }
+        .#{$abbrev}t#{$infix}-#{$size},
+        .#{$abbrev}y#{$infix}-#{$size} {
+          #{$prop}-top: $length !important;
+        }
+        .#{$abbrev}r#{$infix}-#{$size},
+        .#{$abbrev}x#{$infix}-#{$size} {
+          #{$prop}-right: $length !important;
+        }
+        .#{$abbrev}b#{$infix}-#{$size},
+        .#{$abbrev}y#{$infix}-#{$size} {
+          #{$prop}-bottom: $length !important;
+        }
+        .#{$abbrev}l#{$infix}-#{$size},
+        .#{$abbrev}x#{$infix}-#{$size} {
+          #{$prop}-left: $length !important;
+        }
+      }
+    }
+
+    // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
+    @each $size, $length in $spacers {
+      @if $size != 0 {
+        .m#{$infix}-n#{$size} { margin: -$length !important; }
+        .mt#{$infix}-n#{$size},
+        .my#{$infix}-n#{$size} {
+          margin-top: -$length !important;
+        }
+        .mr#{$infix}-n#{$size},
+        .mx#{$infix}-n#{$size} {
+          margin-right: -$length !important;
+        }
+        .mb#{$infix}-n#{$size},
+        .my#{$infix}-n#{$size} {
+          margin-bottom: -$length !important;
+        }
+        .ml#{$infix}-n#{$size},
+        .mx#{$infix}-n#{$size} {
+          margin-left: -$length !important;
+        }
+      }
+    }
+
+    // Some special margin utils
+    .m#{$infix}-auto { margin: auto !important; }
+    .mt#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-top: auto !important;
+    }
+    .mr#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-right: auto !important;
+    }
+    .mb#{$infix}-auto,
+    .my#{$infix}-auto {
+      margin-bottom: auto !important;
+    }
+    .ml#{$infix}-auto,
+    .mx#{$infix}-auto {
+      margin-left: auto !important;
+    }
+  }
+}
+
+// Sizing
+// stylelint-disable declaration-no-important
+
+// Width and height
+
+@each $prop, $abbrev in (width: w, height: h) {
+  @each $size, $length in $sizes {
+    .#{$abbrev}-#{$size} { #{$prop}: $length ; }
+  }
+}
+
+
+
+.mw-100 { max-width: 100% ; }
+.mh-100 { max-height: 100% ; }
+
+// Viewport additional helpers
+
+.min-vw-100 { min-width: 100vw ; }
+.min-vh-100 { min-height: 100vh ; }
+.min-vh-75 { min-height: 80vh ; }
+
+.vw-100 { width: 100vw ; }
+.vh-100 { height: 100vh ; }
+
+// Responsive viewport
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .min#{$infix}-vw-100   { min-width: 100vw !important; }
+    .min#{$infix}-vh-100  { min-height: 100vh !important; }
+    .min#{$infix}-vh-75 { min-height: 80vh !important; }
+
+    .w#{$infix}-100 { width: 100% !important};
+    .w#{$infix}-75 { width: 75% !important};
+    .w#{$infix}-50 { width: 50% !important};
+    .w#{$infix}-25 { width: 25% !important};
+  }
+}
+
+.text-monospace { font-family: $font-family-monospace !important; }
+
+// Alignment
+
+.text-justify  { text-align: justify !important; }
+.text-wrap     { white-space: normal !important; }
+.text-nowrap   { white-space: nowrap !important; }
+.text-truncate { @include text-truncate(); }
+
+// Responsive alignment
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .text#{$infix}-left   { text-align: left !important; }
+    .text#{$infix}-right  { text-align: right !important; }
+    .text#{$infix}-center { text-align: center !important; }
+  }
+}
+
+// Transformation
+
+.text-lowercase  { text-transform: lowercase !important; }
+.text-uppercase  { text-transform: uppercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+// Weight and italics
+
+.font-weight-light   { font-weight: $font-weight-light !important; }
+.font-weight-lighter { font-weight: $font-weight-lighter !important; }
+.font-weight-normal  { font-weight: $font-weight-normal !important; }
+.font-weight-bold    { font-weight: $font-weight-bold !important; }
+.font-weight-bolder  { font-weight: $font-weight-bolder !important; }
+.font-italic         { font-style: italic !important; }
+
+// Contextual colors
+
+.text-white { color: $white !important; }
+
+@each $color, $value in $theme-colors {
+  @include text-emphasis-variant(".text-#{$color}", $value, true);
+}
+
+.text-body { color: $body-color !important; }
+.text-muted { color: $text-muted !important; }
+
+.text-black-50 { color: rgba($black, .5) !important; }
+.text-white-50 { color: rgba($white, .5) !important; }
+
+// Misc
+
+.text-hide {
+  @include text-hide($ignore-warning: true);
+}
+
+.text-decoration-none { text-decoration: none !important; }
+
+.text-break {
+  word-break: break-word !important; // IE & < Edge 18
+  overflow-wrap: break-word !important;
+}
+
+// Reset
+
+.text-reset { color: inherit !important; }
+
+// Other Utilities
+
+$letter-spacing: 0.1em;
+
+.text-primary { color: $primary };
+.bg-primary { background: $primary-bg };
+
+.text-accent { color: $accent !important };
+.bg-accent { background: $accent !important };
+
+.text-green { color: $green !important; }
+
+.text-red { color: $red !important };
+.bg-red { background-color: $red !important; }
+
+.text-alert { color: $alert !important; }
+.bg-alert { background-color: $alert !important; }
+
+.text-warning { color: $warning !important };
+.bg-warning { background-color: $warning !important; }
+
+.text-white { color: $white !important };
+.bg-white { background: $white !important };
+
+.text-red { color: $red !important };
+.bg-red { background: $red !important };
+
+.text-muted { color: $text-muted !important }
+.text-normal { opacity: 1 !important; }
+
+.bg-grey-body {
+  background-color: $grey-body;
+}
+.bg-grey-card {
+  background-color: $grey-card !important;
+}
+.bg-grey-header {
+  background-color: $grey-header;
+}
+
+.letter-space {
+  letter-spacing: $letter-spacing;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

@@ -4,7 +4,7 @@
 
 <div class="content-container">
   <mat-card class="form-card">
-    <h3>{{ isEditMode ? "Update" : "Create" }} Student</h3>
+    <h2>{{ isEditMode ? "Update" : "Create" }} Student</h2>
     <form
       [formGroup]="createStudentForm"
       (ngSubmit)="onSubmit()"

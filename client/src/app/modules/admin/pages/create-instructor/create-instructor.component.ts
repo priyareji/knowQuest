@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ROUTES } from 'src/app/app-routes';
 import { AuthService } from 'src/app/core/services/auth.services';
 
 @Component({
@@ -44,19 +45,24 @@ ngOnInit(): void {
     }
   });
 }
+
+
+
+
+
 onSubmit(): void {
   if (this.createInstructorForm.valid) {
     const payload = this.createInstructorForm.value;
     if (this.isEditMode && this.instructorId) {
       this.authService.updateInstructor(this.instructorId, payload).subscribe(() => {
-        this.router.navigate(['admin', 'manage-instructors']);
+        this.router.navigate(ROUTES.ADMIN.MANAGE_INSTRUCTORS);
       });
     } else {
 
     this.authService.createInstructor(payload).
       subscribe((data: any) => {
         console.log(data)
-        this.router.navigate(['admin', 'manage-instructors'])
+        this.router.navigate(ROUTES.ADMIN.MANAGE_INSTRUCTORS);
   })
     }
 }

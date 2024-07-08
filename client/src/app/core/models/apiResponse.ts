@@ -9,3 +9,7 @@ export interface ApiError{
   status:number;
   errormessage:string;
 }
+
+export interface ApiSuccess<T>{
+  data:T
+}
