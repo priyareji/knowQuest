@@ -46,7 +46,7 @@ export class AdminRootComponent {
 
   logout() {
     const dialogRef = this.matDialog.open(ConfirmDialogueComponent, {
-      data:{title:"Confirmation",message: "Are you sure you want to perform this action?"
+      data:{title:"Confirmation",message: "Are you sure you want to logout?"
   },
       disableClose:true
     }).afterClosed().subscribe((res) => {

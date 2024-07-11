@@ -235,6 +235,7 @@ createSubject = async (req: Request, res: Response, next: NextFunction) => {
           try {
             const { subjectName, course } = req.body;
             console.log(subjectName,course)
+            
             const courseId = course._id; 
             const subject = await  this.adminService.createSubject(subjectName, courseId);
             res.status(201).json({ message: 'Subject created successfully', subject });
@@ -246,6 +247,7 @@ createSubject = async (req: Request, res: Response, next: NextFunction) => {
 getSubjects = async (req: Request, res: Response, next: NextFunction) => {
           try {
             const subjects = await  this.adminService.getSubjects();
+            
             res.status(200).json(subjects);
           } catch (error) {
             next(error);

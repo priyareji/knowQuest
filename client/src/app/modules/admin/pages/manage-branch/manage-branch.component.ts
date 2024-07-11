@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Batch } from 'src/app/core/models/batch';
@@ -11,8 +13,9 @@ import { ConfirmDialogueComponent } from 'src/app/shared/components/confirm-dial
   templateUrl: './manage-branch.component.html',
   styleUrls: ['./manage-branch.component.scss']
 })
-export class ManageBranchComponent implements OnInit, OnDestroy {
-  dataSource: Batch[] = [];
+export class ManageBranchComponent implements OnInit, OnDestroy, AfterViewInit {
+  dataSource=  new MatTableDataSource<Batch>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns = ['batchName', 'modeName','action'];
   private subscriptions = new Subscription();
   matDialog:MatDialog = inject(MatDialog)
@@ -24,6 +27,9 @@ export class ManageBranchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getBatches();
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
@@ -32,11 +38,11 @@ export class ManageBranchComponent implements OnInit, OnDestroy {
   getBatches() {
     this.subscriptions.add(
       this.dataService.getBatchess().subscribe((batches: Batch[]) => {
-        this.dataSource = batches;
+        this.dataSource.data = batches;
         console.log(this.dataSource)
       },
       err => {
-        if(err.status == 500) this.dataSource = [];
+        if(err.status == 500) this.dataSource.data = [];
       })
     );
   }

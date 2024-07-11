@@ -120,6 +120,7 @@ async deleteCourse(courseId: string): Promise<void> {
 async createSubject(subjectName: string, courseId: string): Promise<ISubject> {
   try {
     const subject = new Subject({ subjectName, course: courseId });
+    
     return await subject.save();
   } catch (error) {
     throw new Error('Error creating subject: ' + (error as Error).message);
