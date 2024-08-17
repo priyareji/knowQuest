@@ -7,7 +7,7 @@ import { AdminRepository} from "../repository/adminRepository";
 import { findUserByEmail, findUserById } from "../repository/userRepository";
 import { AccessTokenAndrefreshTokenInterface } from "../types/app.interfaces";
 import HttpStatus from "../types/constants/http-statuscode";
-import { IUser } from "../types/model/IUser.interface";
+import { IINSTRUCTOR} from "../types/model/IUser.interface";
 import AppError from "../utils/AppError";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -18,7 +18,7 @@ export class AuthService{
 adminRepository =  new AdminRepository();
 
 
-async login(email:string,password:string):Promise<{ accessToken:string, refreshToken:string, user:IUser}>  {
+async login(email:string,password:string):Promise<{ accessToken:string, refreshToken:string, user:IINSTRUCTOR}>  {
 console.log("hello")
 // Find user by email
 const user = await findUserByEmail(email);

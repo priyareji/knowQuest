@@ -1,0 +1,20 @@
+<label class="cursor-pointer my-2" matSuffix [for]="label">
+  <input
+    type="file"
+    [name]="label"
+    [id]="label"
+    style="display: none"
+    (change)="addFile($event)"
+  />
+  <div fxLayout="column" class="file-upload-field">
+    <span class="placeholder">{{
+      fileToPreview ? "Click to change file" : "Click to Add File"
+    }}</span>
+  </div>
+</label>
+<mat-chip-set class="mt-2">
+  <mat-chip *ngIf="fileToPreview" [removable]="true" (removed)="onEmptyFile()"
+    >{{ fileToPreview.name | trimString
+    }}<mat-icon matChipRemove>cancel</mat-icon></mat-chip
+  >
+</mat-chip-set>

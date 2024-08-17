@@ -16,7 +16,7 @@ import { CreateModeComponent } from './pages/create-mode/create-mode.component';
 import { ManageModeComponent } from './pages/manage-mode/manage-mode.component';
 import { CreateBranchComponent } from './pages/create-branch/create-branch.component';
 import { ManageBranchComponent } from './pages/manage-branch/manage-branch.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -37,7 +37,7 @@ import { ManageBranchComponent } from './pages/manage-branch/manage-branch.compo
     ManageBranchComponent
   ],
   imports: [
-    CommonModule,SharedModule,AdminRoutingModule,FormsModule,ReactiveFormsModule,
+    CommonModule,SharedModule,AdminRoutingModule,FormsModule,ReactiveFormsModule,FlexLayoutModule
   ]
 })
 export class AdminModule { }

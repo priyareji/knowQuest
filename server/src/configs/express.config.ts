@@ -7,6 +7,7 @@ import { Application } from 'express';
 import { corsOptionsType } from '../types/config-types';
 import session from 'express-session'; 
 import passport from 'passport';
+import errorHandling from '../middlewares/global-error-handling';
   
          
   
@@ -24,9 +25,11 @@ const expressConfig = (app: Application) => {
              resave: false,
            saveUninitialized:false
         })),
+        app.use(errorHandling)
    app.use(passport.initialize()),
           app.use(passport.session()),
           app.use(express.static("public"));
+         
 }
    
 export default expressConfig;

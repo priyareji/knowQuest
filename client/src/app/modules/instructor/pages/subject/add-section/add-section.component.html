@@ -1,0 +1,76 @@
+<div fxLayout="column">
+  <h3 class="mat-h2">Create Section</h3>
+  <form [formGroup]="sectionFormGroup" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Unit</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngFor="let unit of units" [value]="unit">{{
+          unit.unitName
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Select Chapter</mat-label>
+      <mat-select formControlName="chapter">
+        <mat-option *ngFor="let chapter of chapters" [value]="chapter">{{
+          chapter.chapterName
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Enter title of Section</mat-label>
+      <input
+        formControlName="sectionName"
+        matInput
+        placeholder="Eg Reasons for ..."
+      />
+    </mat-form-field>
+
+    <app-add-files
+      (onUpdateFile)="OnFilesUpdate($event)"
+      class="mb-2 mat-form-field"
+    ></app-add-files>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Video Type (optional)</mat-label>
+      <mat-select formControlName="videoType">
+        <mat-option value="youtube">Video (Youtube)</mat-option>
+        <mat-option value="vimeo">Video (Vimeo)</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Enter Video URL</mat-label>
+      <input
+        formControlName="videoUrl"
+        matInput
+        [placeholder]="
+          sectionFormGroup.get('videoType')?.value == 'vimeo'
+            ? 'https://vimeo.com/2.....'
+            : 'https://youtu.be/0S.....'
+        "
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Summary of section(optional)</mat-label>
+      <textarea
+        formControlName="sectionDescription"
+        matInput
+        placeholder="Summary of Chapter"
+      ></textarea>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="gappx">
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="!sectionFormGroup.valid"
+        (click)="onClickCreate()"
+      >
+        Create Section
+      </button>
+    </div>
+  </form>
+  <!-- <h3 *ngIf="displayErrorMessage">{{displayErrorMessage}}</h3> -->
+</div>

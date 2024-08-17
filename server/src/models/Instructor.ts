@@ -1,12 +1,13 @@
-import mongoose,{Document,Schema} from 'mongoose';
-import {IUser} from '../types/model/IUser.interface';
+import mongoose,{Document,Schema, Types,Model} from 'mongoose';
+import {IINSTRUCTOR} from '../types/model/IUser.interface';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import configKey from "../configs/configkeys";
 import { UserRolesEnum } from '../types/constants/user-role-enum';
 
 
-const instructorSchema:Schema = new Schema({
+const instructorSchema:Schema = new Schema<IINSTRUCTOR>({
+    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
@@ -15,7 +16,11 @@ const instructorSchema:Schema = new Schema({
     course:{type:String},
     mode:{type:String},
     batch:{type:String},
-    refreshToken: { type: String }
+    subjects:{type:[String]},
+    refreshToken: { type: String },
+    isBlocked:{type:Boolean,required:true,default:false},
+    resetToken: { type: String },
+  resetTokenExpires: { type: Date },
 })
 instructorSchema.methods.isPasswordCorrect = async function (password: string) {
     return bcrypt.compare(password, this.password);
@@ -23,13 +28,15 @@ instructorSchema.methods.isPasswordCorrect = async function (password: string) {
 instructorSchema.methods.generateAccessToken = async function ():Promise<string> {
     return jwt.sign(
         {
+            _id: this._id,
             name:this.name,
             email:this.email,
             role:this.role,
             phonenumber:this.phonenumber,
             course:this.course,
             mode:this.mode,
-            batch:this.mode,
+            batch:this.batch,
+            isBlocked:this.isBlocked
             
             
         },
@@ -49,8 +56,17 @@ instructorSchema.methods.generateRefreshToken = async function ():Promise<string
 }
 
 
-export interface InstructorDocument extends Document,IUser {
-    
+export interface InstructorDocument extends IINSTRUCTOR,Document {
+    _id: Types.ObjectId;
   }
 
-export const Instructor = mongoose.model<InstructorDocument>('Instructor',instructorSchema)
+
+// interface IInstructorMethods {
+//     isPasswordCorrect(password: string): Promise<boolean>;
+//     generateAccessToken(): Promise<string>;
+//     generateRefreshToken(): Promise<string>;
+//   }
+//   type InstructorModel = Model< InstructorDocument, {}, IInstructorMethods>;
+// export type InstructorDocument = IINSTRUCTOR & Document;
+
+export const Instructor = mongoose.model<IINSTRUCTOR>('Instructor',instructorSchema)

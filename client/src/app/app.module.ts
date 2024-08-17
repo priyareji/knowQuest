@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TokenHandlerInterceptor } from './core/http/tokenHandler.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+
 //import { AlertConfirmationDialogComponent } from './shared/components/alert-confirmation-dialog/alert-confirmation-dialog.component';
 //import { AlertConfirmationDialogComponent } from './modules/shared/components/alert-confirmation-dialog/alert-confirmation-dialog.component';
 
@@ -18,6 +19,8 @@ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
+
+
 
   ],
   imports: [

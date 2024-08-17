@@ -1,4 +1,4 @@
-import { IUser } from '../types/model/IUser.interface';
+//import { IUser } from '../types/model/IUser.interface';
 import { Admin, AdminDocument } from '../models/Admin';
 import { Instructor, InstructorDocument } from '../models/Instructor';
 import { Student, StudentDocument } from '../models/Student';

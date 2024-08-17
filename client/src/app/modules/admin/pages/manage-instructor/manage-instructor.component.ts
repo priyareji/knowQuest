@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ROUTES } from 'src/app/app-routes';
 import { Instructor } from 'src/app/core/models/instructor.model';
+import { AlertService } from 'src/app/core/services/alert/alert.service';
 import { AuthService } from 'src/app/core/services/auth.services';
 
 @Component({
@@ -13,7 +14,7 @@ import { AuthService } from 'src/app/core/services/auth.services';
   styleUrls: ['./manage-instructor.component.scss']
 })
 export class ManageInstructorComponent implements OnInit,OnDestroy {
-  constructor(private authService:AuthService,private router: Router ){}
+  constructor(private authService:AuthService,private router: Router,private alertService: AlertService ){}
   displayedColumns: string[] =['Instructor Name','Email','Action']
   dataSource = new MatTableDataSource<Instructor>();
   private subscriptions = new Subscription();
@@ -48,4 +49,43 @@ export class ManageInstructorComponent implements OnInit,OnDestroy {
     console.log(instructorId)
     this.router.navigate(ROUTES.ADMIN.EDIT_INSTRUCTOR(instructorId));
   }
+  onClickBlock(id:string){
+
+  this.alertService
+  .confirm('Are you sure you want to block this instructor?', 'Ok', 'Cancel')
+  .subscribe((confirm) => {
+    if (!confirm) return;
+
+    console.log("clickeded")
+    this.authService.blockInstructor(id).subscribe(()=>{
+      this.getAllInstructors();
+    })
+
+})
+// err =>{
+//   console.log(err)
+//   if(err.status == 500) console.log(err)
+// })
+
+  }
+  onClickUnBlock(id:string){
+    this.alertService
+  .confirm('Are you sure you want to Unblock this instructor?', 'Ok', 'Cancel')
+  .subscribe((confirm) => {
+    if (!confirm) return;
+    console.log("clickeded")
+this.authService.unBlockInstructor(id).subscribe(()=>{
+  this.getAllInstructors();
+},
+// err =>{
+//   console.log(err)
+//   if(err.status == 500) console.log(err)
+// })
+)})
+  }
+
+
+
+
+
 }

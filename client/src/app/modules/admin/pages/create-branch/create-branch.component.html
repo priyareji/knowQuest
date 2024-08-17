@@ -4,7 +4,7 @@
 
 <div class="content-container">
   <mat-card class="form-card">
-    <h2>Create Batch</h2>
+    <h2>{{ isEditMode ? "Update" : "Create" }} Batch</h2>
     <form [formGroup]="createBatchFormGroup" fxLayout="column">
       <div fxLayout="row" fxLayoutGap="20px">
         <mat-form-field fxFlex="50">
@@ -21,10 +21,19 @@
           <input formControlName="batchName" matInput type="text" />
         </mat-form-field>
       </div>
-
+      <div fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field fxFlex="50">
+          <mat-label>Select Course</mat-label>
+          <mat-select formControlName="course">
+            <mat-option *ngFor="let course of courses" [value]="course">{{
+              course.courseName
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div class="mt-2" fxLayoutAlign="end">
         <button mat-raised-button color="primary" (click)="createBranch()">
-          Create
+          {{ isEditMode ? "Update" : "Create" }}
         </button>
       </div>
     </form>

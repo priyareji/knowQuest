@@ -1,0 +1,45 @@
+<mat-toolbar color="primary" fxLayoutAlign="space-between center">
+  <span> Live Class</span>
+</mat-toolbar>
+
+<div fxLayout="column" class="p-3">
+  <mat-form-field appearance="outline">
+    <mat-label>Choose Subject to assign class</mat-label>
+    <mat-select formControlName="unit">
+      <mat-option *ngFor="let subject of subjectDetails" [value]="subject"
+        >{{ subject.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <input matInput [matDatepicker]="picker" placeholder="03-01-1998" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div fxLayoutAlign="space-between">
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="49%" appearance="outline">
+      <mat-label>Start</mat-label>
+      <input matInput type="time" />
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="49%" appearance="outline">
+      <mat-label>End</mat-label>
+      <input matInput type="time" />
+    </mat-form-field>
+  </div>
+
+  <mat-form-field fxFlex="100" fxFlex.gt-sm="90%" appearance="outline">
+    <mat-label>Details</mat-label>
+    <input matInput type="text" />
+  </mat-form-field>
+
+  <mat-form-field fxFlex="100" fxFlex.gt-sm="90%" appearance="outline">
+    <mat-label>Meet Link</mat-label>
+    <input matInput type="text" />
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutAlign="end end" class="my-2">
+    <button mat-raised-button color="primary">Submit</button>
+  </div>
+</div>

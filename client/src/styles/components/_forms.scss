@@ -1,0 +1,14 @@
+.file-upload-field {
+  border: solid 1px #1a1a1a21 ;
+  transition: 200ms;
+  border-radius: 4px;
+  padding: 6px 11px;
+  height: 35px;
+  height: 50px;
+  margin-bottom: 18px;
+  .placeholder {
+    position: relative;
+    top: 9px;
+    opacity: 0.73;
+  }
+}

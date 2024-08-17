@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ROUTES } from 'src/app/app-routes';
+import { Student } from 'src/app/core/models/student.model';
 import { AuthService } from 'src/app/core/services/auth.services';
 
 @Component({
@@ -56,7 +57,7 @@ export class CreateStudentComponent implements OnInit {
         });
       } else {
       this.authService.createStudent(payload).
-        subscribe((data:any) => {
+        subscribe((data) => {
           console.log(data,"datta")
           this.router.navigate(ROUTES.ADMIN.MANAGE_STUDENT);
     })

@@ -1,9 +1,9 @@
 <div class="sub-header">
-  <h2>Manage Instructors</h2>
+  <h2>Manage Students</h2>
 </div>
 <div class="content-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!--- Note that these columns can be defined in any order.
+    <!--- Note that these columns can be defined in  order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Position Column -->
@@ -42,8 +42,28 @@
           color="accent"
           (click)="onClickEdit(element._id)"
         >
-          <mat-icon>Edit</mat-icon>
+          <mat-icon>edit</mat-icon>
         </button>
+
+        <ng-container *ngIf="element.isBlocked; else unBlockButton">
+          <button
+            class="unblockButton"
+            color="success"
+            e
+            (click)="onClickUnBlock(element._id)"
+          >
+            UnBlock
+          </button>
+        </ng-container>
+        <ng-template #unBlockButton>
+          <button
+            class="blockButton"
+            color="danger"
+            (click)="onClickBlock(element._id)"
+          >
+            Block
+          </button>
+        </ng-template>
       </td>
     </ng-container>
 

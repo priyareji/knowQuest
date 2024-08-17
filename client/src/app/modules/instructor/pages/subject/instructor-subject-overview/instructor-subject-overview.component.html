@@ -1,0 +1,69 @@
+<mat-accordion>
+  <div *ngFor="let unit of units">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <a class="cursor-pointer" (click)="openUnit(unit._id)"
+            ><h3 class="mb-0">{{ unit.unitName }}</h3></a
+          >
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div>
+        <div
+          class="subject-list border p-2 mb-2 rounded"
+          *ngFor="let chapter of chapters"
+        >
+          <a class="cursor-pointer" (click)="openChapter(chapter._id)"
+            ><h3 class="mb-0">{{ chapter.chapterName }}</h3></a
+          >
+
+          <div *ngIf="sections.length > 0" class="ml-3" fxLayout="column">
+            <p>{{ chapter.chapterDescription }}</p>
+
+            <div *ngFor="let section of sections">
+              <div
+                #videoContainer
+                class="border p-2 rounded mb-2"
+                *ngIf="chapter._id == section.chapterId"
+              >
+                <h4 class="underline">{{ section.sectionName }}</h4>
+
+                <div
+                  class="mb-3"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start start"
+                  fxLayoutGap="12px"
+                >
+                  <button
+                    *ngFor="let file of section.files"
+                    mat-stroked-button
+                    color="accent"
+                    (click)="openFile(file.file_path)"
+                  >
+                    <mat-icon>download</mat-icon> {{ file.file_name }}
+                  </button>
+                </div>
+                <!-- <youtube-player
+                  *ngIf="section.videoType === 'youtube'"
+                  [videoId]="section.videoUrl"
+                  suggestedQuality="highres"
+                  [height]="250"
+                  [width]="500"
+                >
+                </youtube-player> -->
+                <p>{{ section.sectionDescription }}</p>
+              </div>
+            </div>
+            <h3 *ngIf="displayNoSectionsMessage">
+              {{ displayNoSectionsMessage }}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <h3 *ngIf="displayNoChaptersMessage">{{ displayNoChaptersMessage }}</h3>
+    </mat-expansion-panel>
+  </div>
+  <h3 *ngIf="displayNoUnitsMessage">{{ displayNoUnitsMessage }}</h3>
+</mat-accordion>

@@ -4,17 +4,17 @@
 
 <div class="content-container">
   <mat-card class="form-card">
-    <h2>Create Subject</h2>
+    <h2>{{ isEditMode ? "Update" : "Create" }} Subject</h2>
     <form [formGroup]="createSubjectFormGroup" fxLayout="column">
       <div fxLayout="row" fxLayoutGap="20px">
-        <mat-form-field fxFlex="50">
+        <!-- <mat-form-field fxFlex="50">
           <mat-label>Select Course</mat-label>
           <mat-select formControlName="course">
             <mat-option *ngFor="let course of courses" [value]="course">{{
               course.courseName
             }}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
         &nbsp; &nbsp;&nbsp; &nbsp;
         <mat-form-field fxFlex="50">
           <mat-label>Subject Name</mat-label>
@@ -24,7 +24,7 @@
 
       <div class="mt-2" fxLayoutAlign="end">
         <button mat-raised-button color="primary" (click)="createSubject()">
-          Create
+          {{ isEditMode ? "Update" : "Create" }}
         </button>
       </div>
     </form>

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ROUTES } from 'src/app/app-routes';
 import { Subject } from 'src/app/core/models/subject';
 import { DataService } from 'src/app/core/services/data.service';
 import { ConfirmDialogueComponent } from 'src/app/shared/components/confirm-dialogue/confirm-dialogue.component';
@@ -16,7 +17,7 @@ import { ConfirmDialogueComponent } from 'src/app/shared/components/confirm-dial
 export class ManageSubjectComponent implements OnInit, OnDestroy,AfterViewInit {
   dataSource = new MatTableDataSource<Subject>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns = ['subjectName', 'courseName','action'];
+  displayedColumns = ['subjectName','action'];
   private subscriptions = new Subscription();
   matDialog:MatDialog = inject(MatDialog)
   constructor(
@@ -47,6 +48,11 @@ export class ManageSubjectComponent implements OnInit, OnDestroy,AfterViewInit {
         if(err.status == 500) this.dataSource.data = [];
       })
     );
+  }
+
+  onClickEdit(id: string) {
+    console.log(id)
+    this.router.navigate(ROUTES.ADMIN.EDIT_SUBJECT(id));
   }
 
   onClickDelete(subjectId:string){

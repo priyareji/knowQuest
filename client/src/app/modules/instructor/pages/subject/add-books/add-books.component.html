@@ -1,0 +1,53 @@
+<div fxLayout="column" class="border-bottom pb-3">
+  <h4>Add Books</h4>
+  <form [formGroup]="addBookFormGroup" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter Book title</mat-label>
+      <input
+        formControlName="bookName"
+        matInput
+        placeholder="Section heading"
+      />
+    </mat-form-field>
+    <app-add-files (onUpdateFile)="OnFilesUpdate($event)"></app-add-files>
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="gappx">
+      <button mat-raised-button color="primary" (click)="onClickaddBook()">
+        Add Book
+      </button>
+    </div>
+    <!-- <button (click)="print()">p</button> -->
+  </form>
+</div>
+<div fxLayout="column" class="pt-3">
+  <h4>Add Video</h4>
+  <form [formGroup]="addVideoFormGroup" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Video title</mat-label>
+      <input formControlName="videoName" matInput placeholder="video URL" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Select Video Type</mat-label>
+      <mat-select formControlName="videoType">
+        <mat-option value="youtube">Video (Youtube)</mat-option>
+        <mat-option value="vimeo">Video (Vimeo)</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Video URL</mat-label>
+      <input formControlName="videoUrl" matInput placeholder="video URL" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Summary</mat-label>
+      <textarea
+        formControlName="videoSummary"
+        matInput
+        placeholder="Summary of video"
+      ></textarea>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="gappx">
+      <button mat-raised-button color="primary" (click)="onClickaddVideo()">
+        Add Video
+      </button>
+    </div>
+  </form>
+</div>

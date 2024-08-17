@@ -1,0 +1,41 @@
+@import "../../../../../styles/global/includes";
+.header-student {
+  height: 100vh;
+  padding: 6px;
+}
+.logo-container {
+  height: 40px;
+  width: 69px;
+  background: url("../../../../../assets/images/pschool-info.png");
+}
+.header-link {
+  font-size: 17px !important;
+  font-weight: normal;
+  color: #808080 !important;
+}
+
+.profile-image {
+  width: 22px;
+}
+
+// .sidenav {
+//   min-width: 240px;
+//   padding: 0px 8px;
+//   box-shadow: none;
+//   border: none;
+// }
+.profile-image-container {
+  height: 200px;
+  background-image: url('../../../../../assets/images/student.avif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.position {
+  position: relative;
+  bottom: 1px;
+}
+.sidenav-list{
+  width: 100%;
+  height: 100%;
+}
+

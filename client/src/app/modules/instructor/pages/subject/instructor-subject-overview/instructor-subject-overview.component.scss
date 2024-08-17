@@ -1,0 +1,18 @@
+.subject-list:hover {
+  background-color: #cccccc4d;
+}
+.subject-list {
+  transition: .2s;
+}
+
+.underline{
+  text-decoration: underline;
+}
+a {
+  color: rgba(0, 0, 0, 0.816);
+}
+a:hover {
+  text-decoration: underline;
+  color: rgb(80, 127, 214)
+}
+.mat-expansion-panel { box-shadow: none;}

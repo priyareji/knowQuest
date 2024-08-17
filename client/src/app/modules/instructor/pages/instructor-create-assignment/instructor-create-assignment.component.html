@@ -1,0 +1,102 @@
+<div fxLayout="column" class="p-3">
+  <mat-form-field>
+    <mat-label>Select Subject</mat-label>
+    <mat-select [(ngModel)]="subject">
+      <mat-option *ngFor="let subject of subjectDetails" [value]="subject"
+        >{{ subject.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Assignment Title</mat-label>
+    <input [(ngModel)]="assignmentTitle" matInput />
+  </mat-form-field>
+
+  <mat-radio-group [(ngModel)]="isUploadFile" aria-label="Select an option">
+    <mat-radio-button [value]="'custom'"
+      >Create Question Paper</mat-radio-button
+    >
+    <mat-radio-button [value]="'upload'"
+      >Upload Question Paper</mat-radio-button
+    >
+  </mat-radio-group>
+
+  <div class="mt-4" *ngIf="isUploadFile == 'custom'">
+    <h3>Create Assignment Questions</h3>
+    <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="14px">
+      <div fxLayout="column">
+        <mat-form-field>
+          <mat-label>Enter Question</mat-label>
+          <input [(ngModel)]="createQuestion.question" matInput />
+        </mat-form-field>
+
+        <!-- <app-add-files
+        [id]="'createAssignment'"
+        (onUpdateFile)="updateFile($event)"
+      ></app-add-files> -->
+        <app-add-file
+          [id]="'createAssignment'"
+          (onUpdateFile)="updateFile($event)"
+        ></app-add-file>
+      </div>
+      <button mat-stroked-button color="accent" (click)="onAddQuestion()">
+        Add Question
+      </button>
+    </div>
+
+    <div class="my-2" fxLayout="column">
+      <div
+        class="p-2 my-1 border rounded"
+        *ngFor="let question of createdQuestions; let i = index"
+      >
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxLayoutGap="gappx"
+        >
+          <h3>Qn {{ i + 1 }}. {{ question.question }}</h3>
+          <a (click)="deleteQuestion(i)">Remove</a>
+        </div>
+
+        <mat-chip-set *ngIf="question.file">
+          <mat-chip>{{ question.file.name }}</mat-chip>
+        </mat-chip-set>
+        <span class="font-italic" *ngIf="!question.file">
+          (No file selected)
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4" *ngIf="isUploadFile == 'upload'">
+    <h3>Upload Question Paper</h3>
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <app-add-file
+        [id]="'uploadAssignment'"
+        (onUpdateFile)="updateWholeQuestionFile($event)"
+      ></app-add-file>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <button
+      *ngIf="isUploadFile == 'custom'"
+      [disabled]="createdQuestions.length == 0"
+      mat-flat-button
+      color="accent"
+      (click)="onCreateAssignment()"
+    >
+      Create assignment
+    </button>
+    <button
+      *ngIf="isUploadFile == 'upload'"
+      [disabled]="!isUploadFile"
+      mat-flat-button
+      color="accent"
+      (click)="onCreateAssignment()"
+    >
+      Submit assignment
+    </button>
+  </div>
+</div>

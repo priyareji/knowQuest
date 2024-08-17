@@ -1,0 +1,41 @@
+<div fxLayout="column">
+  <h3 class="mat-h2">Create Chapter</h3>
+  <form [formGroup]="chapterFormGroup" fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Choose Unit which the chapter belongs to</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngFor="let unit of units" [value]="unit">{{
+          unit.unitName
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Enter Title of Chapter</mat-label>
+      <input
+        formControlName="chapterName"
+        matInput
+        placeholder="Chapter Title"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Summary of Chapter</mat-label>
+      <textarea
+        formControlName="chapterDescription"
+        matInput
+        placeholder="Summary of Chapter"
+      ></textarea>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="gappx">
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="!chapterFormGroup.valid"
+        (click)="onClickCreate()"
+      >
+        Create Chapter
+      </button>
+    </div>
+  </form>
+  <!-- <h3 *ngIf="displayErrorMessage">{{ displayErrorMessage }}</h3> -->
+</div>

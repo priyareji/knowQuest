@@ -1,5 +1,5 @@
 <div class="sub-header">
-  <h2>Manage Branches</h2>
+  <h2>Manage Courses</h2>
 </div>
 <div class="content-container">
   <table
@@ -8,7 +8,7 @@
     [dataSource]="dataSource"
     class="w-100"
   >
-    <!--- Note that these columns can be defined in any order.
+    <!--- Note that these columns can be defined in  order.
           The actual rendered columns are set as a property on the row definition" -->
     <!-- Course Column -->
     <ng-container matColumnDef="courseName">
@@ -33,6 +33,13 @@
           (click)="onClickDelete(course._id)"
         >
           <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="accent"
+          (click)="onClickEdit(course._id)"
+        >
+          <mat-icon>edit</mat-icon>
         </button>
       </td>
     </ng-container>

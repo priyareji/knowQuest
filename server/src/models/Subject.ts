@@ -8,7 +8,7 @@ export interface ISubject extends Document {
 
 const subjectSchema = new Schema({
   subjectName: { type: String, required: true },
-  course: { type: Schema.Types.ObjectId, ref: 'Course', required: true },
+  course: { type: Schema.Types.ObjectId, ref: 'Course' },
   isActive: { type: Boolean, default: true },
   
 });

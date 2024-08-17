@@ -33,7 +33,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatDividerModule} from '@angular/material/divider';
+import { AlertService } from 'src/app/core/services/alert/alert.service';
+//import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -77,6 +79,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDividerModule,
+
   ],
 
   exports: [
@@ -113,8 +117,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDividerModule,
+    //MatChipsModule
 
 
   ],
+  providers: [AlertService],
 })
 export class MaterialModule { }

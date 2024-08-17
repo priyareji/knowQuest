@@ -1,0 +1,21 @@
+<label class="cursor-pointer my-2" matSuffix [for]="label">
+  <input
+    type="file"
+    [name]="label"
+    [id]="label"
+    style="display: none"
+    (change)="addFiles($event)"
+  />
+  <div fxLayout="column" class="file-upload-field">
+    <span class="placeholder">Click to Add Files...</span>
+  </div>
+</label>
+<mat-chip-set class="mt-2">
+  <mat-chip
+    *ngFor="let attachment of filesToPreview; let i = index"
+    [removable]="true"
+    (removed)="removeFile(i)"
+    >{{ attachment.name | trimString
+    }}<mat-icon matChipRemove>cancel</mat-icon></mat-chip
+  >
+</mat-chip-set>

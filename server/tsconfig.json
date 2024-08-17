@@ -103,6 +103,14 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+    "skipLibCheck": true,      
+    "typeRoots": ["./node_modules/@types", "./src/types"],                           /* Skip type checking all .d.ts files. */
+  },
+  "include": [
+    "src/**/*.ts",  // This includes all your source files
+    "src/types/express/index.d.ts"  // This includes your specific type declaration file
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

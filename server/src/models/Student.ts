@@ -1,11 +1,12 @@
-import mongoose,{Document,Schema} from 'mongoose';
-import {IUser} from '../types/model/IUser.interface';
+import mongoose,{Document,Schema,Model, Types} from 'mongoose';
+import {ISTUDENT} from '../types/model/IUser.interface';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import configKey from "../configs/configkeys";
 import { UserRolesEnum } from '../types/constants/user-role-enum';
 
-const studentSchema:Schema = new Schema({
+const studentSchema:Schema = new Schema<ISTUDENT>({
+    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
@@ -13,7 +14,11 @@ const studentSchema:Schema = new Schema({
     course:{type:String},
     role:{type:String,required:true, default: UserRolesEnum.STUDENT},
     mode:{type:String},
-    refreshToken: { type: String }
+    batch:{type:String},
+    refreshToken: { type: String },
+    isBlocked:{type:Boolean,required:true,default:false},
+    resetToken: { type: String },
+    resetTokenExpires: { type: Date },
 
 })
 studentSchema.methods.isPasswordCorrect = async function (password: string) {
@@ -30,7 +35,8 @@ studentSchema.methods.generateAccessToken = async function ():Promise<string> {
             course:this.course,
             role: this.role,
             batch:this.batch,
-            mode:this.mode
+            mode:this.mode,
+            isBlocked:this.isBlocked
             
         },
         configKey().ACCESS_TOKEN_SECRET,
@@ -48,7 +54,16 @@ studentSchema.methods.generateRefreshToken = async function ():Promise<string>{
     )
 }
 
-export interface StudentDocument extends Document,IUser {
-   
+export interface StudentDocument extends ISTUDENT,Document {
+    _id: Types.ObjectId;
   }
-  export const Student = mongoose.model<StudentDocument>('Student',studentSchema)
+// interface IStudentMethods {
+//     isPasswordCorrect(password: string): Promise<boolean>;
+//     generateAccessToken(): Promise<string>;
+//     generateRefreshToken(): Promise<string>;
+//   }
+  
+//   type StudentModel = Model<StudentDocument, {}, IStudentMethods>;
+// export type StudentDocument = ISTUDENT & Document;
+  
+export const Student = mongoose.model<ISTUDENT >('Student',studentSchema)

@@ -57,6 +57,7 @@ const routes: Routes = [
         path: 'manage-courses',
         component: ManageCourseComponent,
       },
+
     {
       path:'create-mode',
       component:CreateModeComponent
@@ -72,14 +73,22 @@ const routes: Routes = [
     {
       path:'manage-batches',
       component:ManageBranchComponent
-    },{
+    },
+    {
+      path: 'edit-batch/:batchId',
+      component: CreateBranchComponent,
+    },
+    {
       path:'create-subject',
       component:CreateSubjectComponent
     },
     {
       path:'manage-subject',
       component:ManageSubjectComponent
-    }
+    }, {
+      path: 'edit-subject/:subjectId',
+      component:CreateSubjectComponent,
+    },
 
     ]
   }

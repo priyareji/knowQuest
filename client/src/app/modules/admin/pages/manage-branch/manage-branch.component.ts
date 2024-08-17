@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ROUTES } from 'src/app/app-routes';
 import { Batch } from 'src/app/core/models/batch';
 import { DataService } from 'src/app/core/services/data.service';
 import { ConfirmDialogueComponent } from 'src/app/shared/components/confirm-dialogue/confirm-dialogue.component';
@@ -60,6 +61,10 @@ export class ManageBranchComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         })
     );
+  }
+  onClickEdit(BatchId: string) {
+    console.log(BatchId)
+    this.router.navigate(ROUTES.ADMIN.EDIT_Batch(BatchId));
   }
   }
 

@@ -1,0 +1,29 @@
+<mat-toolbar color="primary" fxLayoutAlign="space-between center">
+  <span>Prepare Questions</span>
+</mat-toolbar>
+
+<div fxLayout="column" class="p-3">
+  <mat-form-field>
+    <mat-label>Select Question Type</mat-label>
+    <mat-select>
+      <mat-option value="option1">One Word</mat-option>
+      <mat-option value="option2">Multiple Choice</mat-option>
+      <mat-option value="option3">Essay</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Enter Question</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="14px">
+    <mat-form-field>
+      <mat-label>Mark</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="14px">
+    <button mat-stroked-button color="accent">Add Question</button>
+  </div>
+</div>

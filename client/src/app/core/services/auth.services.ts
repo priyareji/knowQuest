@@ -50,6 +50,9 @@ import { Instructor } from "../models/instructor.model";
     createInstructor(payload:Record<string,string>){
       return this.http.post<ApiResponse>(`${this.apiUrl}/admin/createInstructor`,payload)
     }
+    resetPassword(token: string, newPassword: string): Observable<any> {
+      return this.http.post(`${this.apiUrl}/admin/reset-password/instructor`, { token, newPassword });
+    }
     getAllInstructors(): Observable<Instructor[]> {
 
       return this.http.get<Instructor[]>(`${this.apiUrl}/admin/getAllInstructors` )
@@ -76,6 +79,19 @@ import { Instructor } from "../models/instructor.model";
     userLogout() {
       return this.http.post<ApiResponse>(this.apiUrl+'/admin/logout',{})
     }
+    blockInstructor(id:string){
+      return this.http.put(`${this.apiUrl}/admin/blockInstructor/${id}`,{})
+    }
+    unBlockInstructor(id:string){
+      return this.http.put(`${this.apiUrl}/admin/unblockInstructor/${id}`,{})
+    }
+    blockStudent(id:string){
+      return this.http.put(`${this.apiUrl}/admin/blockStudent/${id}`,{})
+    }
+    unBlockStudent(id:string){
+      return this.http.put(`${this.apiUrl}/admin/unblockStudent/${id}`,{})
+    }
+
 
 
     refreshAccessToken() {

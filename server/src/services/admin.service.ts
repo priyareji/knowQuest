@@ -1,23 +1,30 @@
 //import { getAllInstructor, getAllStudent } from "../controller/admin.controller";
 //import { createAdmin, createInstructor, createStudent, findInstructorById, findStudentById, getAllinstructors, getAllstudents } from "../repository/adminRepository";
+import { Batch, IBatch } from "../models/Batch";
+import { Course, ICourse } from "../models/Course";
 import { IMode } from "../models/Mode";
+import { ISubject, Subject } from "../models/Subject";
 import { AdminRepository } from "../repository/adminRepository";
 import { findUserByEmail } from "../repository/userRepository";
 import HttpStatus from "../types/constants/http-statuscode";
 import { UserRolesEnum } from "../types/constants/user-role-enum";
-import { IUser } from "../types/model/IUser.interface";
+import { IINSTRUCTOR,ISTUDENT,IADMIN } from "../types/model/IUser.interface";
 import AppError from "../utils/AppError";
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
+import { EmailService } from "./email.service";
 
 export class  AdminService{
   saltRounds =10;
 
   private adminRepository:AdminRepository;
+  private emailService:EmailService;
   constructor(){
     this.adminRepository= new AdminRepository();
+    this.emailService= new EmailService();
   }
-async  register (userData:IUser):Promise<IUser>{
-    const {name,email,password,phonenumber,role,isAdmin,course,batch,subject,mode}=userData
+async  register (userData:IINSTRUCTOR | IADMIN | ISTUDENT){
+    const {name,email,password,phonenumber,role,isAdmin,course,batch,subjects,mode,isBlocked}=userData
 
     //check if user already exits
     const existingUser=await findUserByEmail(email);
@@ -38,24 +45,30 @@ async  register (userData:IUser):Promise<IUser>{
           break;
         case UserRolesEnum.INSTRUCTOR:
           newUser = await this.adminRepository.createInstructor({...userData, password: hashedPassword});
+          const resetToken = crypto.randomBytes(20).toString('hex')
+          await this.adminRepository.saveInstructorResetToken(newUser.id,resetToken);
+          await this.emailService.sendPasswordResetEmail(userData.email,resetToken)
           break;
         case UserRolesEnum.STUDENT:
           newUser = await this.adminRepository.createStudent({...userData, password: hashedPassword});
+          const resetTokenStudent = crypto.randomBytes(20).toString('hex')
+          await this.adminRepository.saveStudentResetToken(newUser.id,resetTokenStudent);
+          await this.emailService.sendPasswordResetEmail(userData.email,resetTokenStudent)
           break;
         default:
           throw new Error('Invalid role');
       }
-      return newUser
+      return newUser;
 }
 
 
-async  getAllInstructors():Promise<IUser[]>{
-  return await this.adminRepository.getAllinstructors()
+async  getAllInstructors():Promise<IINSTRUCTOR[]>{
+  return await this.adminRepository.getAllinstructors() 
 }
-async  getAllStudents():Promise<IUser[]> {
+async  getAllStudents():Promise<ISTUDENT[]> {
   return await this.adminRepository.getAllstudents()
 }
-async  editInstructorById(id: string, instructorData: Partial<IUser>): Promise<IUser>{
+async  editInstructorById(id: string, instructorData: Partial<IINSTRUCTOR>): Promise<IINSTRUCTOR>{
   const instructor = await this.adminRepository.findInstructorById(id);
   if (!instructor) {
     throw new Error('Instructor not found');
@@ -64,30 +77,35 @@ async  editInstructorById(id: string, instructorData: Partial<IUser>): Promise<I
   // Update instructor fields
   Object.assign(instructor, instructorData);
   await instructor.save();
-  return instructor;
+  return instructor as IINSTRUCTOR;
 }
-async editStudentById (id: string, studentData: Partial<IUser>): Promise<IUser>{
+async editStudentById (id: string, studentData: Partial<ISTUDENT>): Promise<ISTUDENT>{
   const student = await this.adminRepository.findStudentById(id);
   if (!student) {
-    throw new Error('Instructor not found');
+    throw new Error('student not found');
   }
 
   // Update instructor fields
   Object.assign(student, studentData);
   await student.save();
-  return student;
+  return student as ISTUDENT;
 }
 
-async getInstructorById(id: string): Promise<IUser | null>{
+async getInstructorById(id: string): Promise<IINSTRUCTOR | null>{
   const instructor = await this.adminRepository.findInstructorById(id);
-  return instructor
+  return instructor as IINSTRUCTOR
 }
-async  getStudentById(id: string): Promise<IUser | null>{
+async  getStudentById(id: string): Promise<IINSTRUCTOR | null>{
   const student = await this.adminRepository.findStudentById(id);
-  return student
+  return student as IINSTRUCTOR
 }
 
 async createMode(modeData:Partial<IMode>):Promise<IMode>{
+  // const mode = await this.adminRepository.findModeByModeName(modeData);
+  // console.log(mode,"mode")
+  // if (mode) {
+  //   throw new  AppError('This mode is already exit', HttpStatus.BAD_REQUEST);
+  // }
   return await this.adminRepository.createMode(modeData);
 }
 async getAllModes(): Promise<IMode[]> {
@@ -102,13 +120,21 @@ async deleteMode(id: string): Promise<IMode | null> {
   return await this.adminRepository.deleteMode(id);
 }
 
-async createBatch(batchName: string, modeId: string){
+async createBatch(batchName: string, modeId: string,courseId: string){
   try{
-    return await this.adminRepository.CreateBatch(batchName, modeId)
+    const batch = await this.adminRepository.findBatchByBatchName(batchName);
+    console.log(batch,"batch")
+    if (batch) {
+      throw new  AppError('This batch is already exit', HttpStatus.BAD_REQUEST);
+    }
+    return await this.adminRepository.CreateBatch(batchName, modeId,courseId)
   }
-  catch(error){
-  throw new Error('Error deleting batch: ' + (error as Error).message)
-}
+  catch (error) {
+    if (error instanceof AppError) {
+      throw error;
+    }
+    throw new AppError('Error creating batch: ' + (error as Error).message, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
 }
 
 async getAllBatches(){
@@ -120,6 +146,22 @@ async getAllBatches(){
   }
 }
 
+async getBatchById(batchId: string){
+  try {
+    return await this.adminRepository.getBatchById(batchId)
+  } catch (error) {
+    console.error('Error fetching batch:', error);
+    throw error;
+  }
+}
+async getCourseById(courseId: string){
+  try {
+    return await this.adminRepository.getCourseById(courseId)
+  } catch (error) {
+    console.error('Error fetching course:', error);
+    throw error;
+  }
+}
 async deleteBatch(id:string){
   try{
     return await this.adminRepository.deleteBatch(id);
@@ -128,9 +170,44 @@ async deleteBatch(id:string){
     throw new Error('Error in BatchService delete Batch: ' + (error as Error).message)
   }
 }
-async createCourse(courseName: string, description: string) {
+async updateBatch(batchId: string, updateData: Record<string, string>): Promise<IBatch | null> {
   try {
-    return await this.adminRepository.createCourse(courseName, description);
+    // Find and update the batch
+    const updatedBatch = await Batch.findByIdAndUpdate(batchId, updateData, { new: true }).exec();
+    return updatedBatch;
+  } catch (error) {
+    console.error('Error updating batch:', error);
+    throw error;
+  }
+}
+async updateCourse(courseId: string, updateData: Record<string, string>): Promise<ICourse | null> {
+  try {
+    // Find and update the batch
+    const updatedCourse = await Course.findByIdAndUpdate(courseId, updateData, { new: true }).exec();
+    return updatedCourse;
+  } catch (error) {
+    console.error('Error updating Course:', error);
+    throw error;
+  }
+}
+async updatesubject(subjectId:string,updateData: Record<string, string>): Promise<ISubject | null>{
+  try {
+    // Find and update the batch
+    const updatedsubject= await Subject.findByIdAndUpdate(subjectId, updateData, { new: true }).exec();
+    return updatedsubject;
+  } catch (error) {
+    console.error('Error updating subject:', error);
+    throw error;
+  }
+}
+async createCourse(courseName: string, description: string,subjectIds:string[]) {
+  try {
+    const course = await this.adminRepository.findCourseByName(courseName);
+    
+    if (course) {
+      throw new  AppError('This course is already exit', HttpStatus.BAD_REQUEST);
+    }
+    return await this.adminRepository.createCourse(courseName, description,subjectIds);
   } catch (error) {
     throw new Error('Error creating course: ' + (error as Error).message);
   }
@@ -151,9 +228,16 @@ async deleteCourse(courseId: string) {
     throw new Error('Error deleting course: ' + (error as Error).message);
   }
 }
-async createSubject(subjectName: string, courseId: string) {
+async createSubject(subjectName: string) {
   try {
-    return await this.adminRepository.createSubject(subjectName, courseId);
+    const subject = await this.adminRepository.findSubjectByName(subjectName);
+    
+    console.log(subject,"subjectt")
+    if (subject) {
+      throw new  AppError('This subject is already exit', HttpStatus.BAD_REQUEST);
+    }
+
+    return await this.adminRepository.createSubject(subjectName);
   } catch (error) {
     throw new Error('Error creating subject: ' + (error as Error).message);
   }
@@ -164,6 +248,13 @@ async getSubjects() {
     return await this.adminRepository.getSubjects();
   } catch (error) {
     throw new Error('Error fetching subjects: ' + (error as Error).message);
+  }
+}
+async getSubject(subjectId: string) {
+  try {
+   return await this.adminRepository.getSubject(subjectId);
+  } catch (error) {
+    throw new Error('Error  fetching subject: ' + (error as Error).message);
   }
 }
 
@@ -181,7 +272,43 @@ async updateSubjectStatus(subjectId: string, isActive: boolean) {
     throw new Error('Error updating subject status: ' + (error as Error).message);
   }
 }
+async getInstructorInfo(){
+  
+}
 
+async blockInstructor(id:string){
+  try{
+    return await this.adminRepository.blockInstuctorById(id)
+  }
+  catch(error){
+    throw new Error('Error blocking Instructor:' + (error as Error).message)
+  }
+}
+async unblockInstructor(id:string){
+  try{
+    return await this.adminRepository.unblockInstuctorById(id)
+  }
+  catch(error){
+    throw new Error('Error blocking Instructor:' + (error as Error).message)
+  }
+}
+
+async blockStudent(id:string){
+  try{
+    return await this.adminRepository.blockStudentById(id)
+  }
+  catch(error){
+    throw new Error('Error blocking Student '+ (error as Error).message)
+  }
+}
+async unblockStudent(id:string){
+  try{
+    return await this.adminRepository.unblockStudentById(id)
+  }
+  catch(error){
+    throw new Error('Error blocking Student '+ (error as Error).message)
+  }
+}
 
 }
 

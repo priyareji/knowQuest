@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import {  Subscription } from 'rxjs';
 import { ROUTES } from 'src/app/app-routes';
+import { Subject } from 'src/app/core/models/subject';
 import { AuthService } from 'src/app/core/services/auth.services';
+import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
   selector: 'app-create-instructor',
   templateUrl: './create-instructor.component.html',
   styleUrls: ['./create-instructor.component.scss']
 })
-export class CreateInstructorComponent implements OnInit {
+export class CreateInstructorComponent implements OnInit,OnDestroy {
 
   createInstructorForm: FormGroup;
   isEditMode = false;
   instructorId: string | null = null;
-
-constructor(private authService:AuthService,private router:Router,private route: ActivatedRoute){
+  subjectlist: Subject[]=[]
+  private subscriptions = new Subscription();
+constructor(private authService:AuthService,private router:Router,private route: ActivatedRoute, private dataService: DataService,){
   this.createInstructorForm=new FormGroup({
     name:new FormControl(null,[Validators.required]),
     email:new FormControl(null,[Validators.required,Validators.email]),
@@ -24,6 +28,7 @@ constructor(private authService:AuthService,private router:Router,private route:
     course:new FormControl(null,[Validators.required]),
     batch:new FormControl(null,[Validators.required]),
     mode:new FormControl(null,[Validators.required]),
+    subjects:new FormControl([],[Validators.required]),
 
   })
 }
@@ -44,10 +49,21 @@ ngOnInit(): void {
       });
     }
   });
+  this.getSubjects()
 }
 
 
-
+getSubjects() {
+  this.subscriptions.add(
+    this.dataService.getSubjects().subscribe((subjects: Subject[]) => {
+      this.subjectlist=subjects
+      console.log( this.subjectlist)
+    },
+    err => {
+      if(err.status == 500) this.subjectlist= [];
+    })
+  );
+}
 
 
 onSubmit(): void {
@@ -67,5 +83,7 @@ onSubmit(): void {
     }
 }
 }
-
+ngOnDestroy() {
+  this.subscriptions.unsubscribe();
+}
 }

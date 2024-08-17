@@ -58,8 +58,17 @@
       </div>
       <div fxLayout="row" fxLayoutGap="20px">
         <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
-          <mat-label>batch</mat-label>
+          <mat-label>Batch</mat-label>
           <input name="mode" matInput type="text" formControlName="batch" />
+        </mat-form-field>
+        &nbsp; &nbsp;&nbsp; &nbsp;
+        <mat-form-field fxFlex="100" fxFlex.gt-sm="40%">
+          <mat-label>Subjects</mat-label>
+          <mat-select formControlName="subjects" multiple>
+            <mat-option *ngFor="let subject of subjectlist" [value]="subject">{{
+              subject.subjectName
+            }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
 

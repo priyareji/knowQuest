@@ -8,5 +8,6 @@ phonenumber:number,
 course:string,
 role: string,
 batch:string,
-mode:string
+mode:string,
+subjects:string[]
 }

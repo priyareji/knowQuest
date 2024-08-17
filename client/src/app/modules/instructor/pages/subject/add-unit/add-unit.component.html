@@ -1,0 +1,21 @@
+<h3 class="mat-h2">Create Unit</h3>
+<div
+  class="w-100"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="12px"
+>
+  <mat-form-field class="form-field" fxFlex.lt-md="70" appearance="outline">
+    <mat-label>Unit</mat-label>
+    <input [(ngModel)]="unitName" matInput placeholder="Enter Unit name" />
+  </mat-form-field>
+  <button
+    (click)="onClickCreate()"
+    [disabled]="unitName == ''"
+    mat-flat-button
+    color="accent"
+  >
+    Create Unit
+  </button>
+</div>
+

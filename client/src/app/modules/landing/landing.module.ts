@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './state/auth.effect';
 import { authReducer } from './state/auth.reducer';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -16,7 +17,8 @@ import { authReducer } from './state/auth.reducer';
 @NgModule({
   declarations: [
 
-    LandingPageComponent
+    LandingPageComponent,
+      ResetPasswordComponent
   ],
   imports: [
     CommonModule,SharedModule,LandingRoutingModule,FormsModule,ReactiveFormsModule,
