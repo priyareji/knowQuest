@@ -9,16 +9,25 @@ import { InstructorService } from "../services/instructor.service";
 import { IVideo } from "../models/Video";
 import { upload } from "../middlewares/multer";
 import { IAssignment, IQuestion } from "../models/Assignment";
-
+import { hashPassword } from '../utils/hashPassword';
+import bcrypt from 'bcrypt';
+import { InstructorRepository } from "../repository/instructorRepository";
 
 
 export class InstructorController {
     private adminService:AdminService
     private instructorService:InstructorService
+    private instructorRepository:InstructorRepository
+     SALT_ROUNDS = 10;
+
     constructor(){
         this.adminService = new AdminService();
         this.instructorService = new InstructorService()
+        this.instructorRepository = new InstructorRepository()
     }
+
+   
+
     async getInstructorInfo(req:Request, res: Response, next: NextFunction){
         const user = req.user as USER; // Type assertion
         console.log("reqqq", user?._id?.toString()); 
@@ -36,6 +45,9 @@ export class InstructorController {
             }
 
     }
+
+
+    
  async createUnit(req:Request,res:Response,next:NextFunction){
     try{
         const unitData:IUnit = req.body;
@@ -218,6 +230,50 @@ console.log("hello unit Id",unitId)
         }
 
 }
+
+async createQuestion(req:Request,res:Response,next:NextFunction):Promise<void>{
+  try{
+      const questionData = req.body;
+      const question = await this.instructorService.createQuestion(questionData);
+      res.status(HttpStatus.OK).json(new ApiResponse(HttpStatus.OK,question,'question Created Successfully'))
+  }
+  catch (error) {
+      res.status(500).json({ message: 'An error occurred', error: (error as Error).message });
+    }
+}
+
+
+async createLiveClass(req:Request,res:Response,next:NextFunction):Promise<void>{
+  try{
+      const liveData = req.body;
+      const liveClass = await this.instructorService.createLiveClass(liveData);
+      res.status(HttpStatus.OK).json(new ApiResponse(HttpStatus.OK,liveClass,'Live Class Created Successfully'))
+  }
+  catch (error) {
+      res.status(500).json({ message: 'An error occurred', error: (error as Error).message });
+    }
+}
+
+async changePassword(req: Request, res: Response) {
+  try {
+    const {email, currentPassword, newPassword } = req.body;
+   // const userId = req.user.id; // Assuming the user ID is available in the request after authentication
+
+    const user = await this.instructorRepository.findByEmail(email);
+
+    if (!user ) {
+      return res.status(400).json({ error: 'Invalid current password' });
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
+    await this.instructorRepository.updatePassword(email, hashedPassword);
+
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 
 
 }

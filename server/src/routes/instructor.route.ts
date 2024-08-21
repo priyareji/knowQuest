@@ -30,7 +30,10 @@ export const instructorRoute=()=>{
         router.get('/getChaptersByUnitId/:unitId',verifyJWT,(req,res,next)=>instructorController.getChaptersByUnitId(req,res,next));
         router.get('/getSectionsByChapterId/:chapterId',verifyJWT,(req,res,next)=>instructorController.getSectionsByChapterId(req,res,next))
         router.post('/createAssignment',verifyJWT, upload,(req,res,next)=>instructorController.createAssignment(req,res,next))
-       router.get('/getAssignmentsByInstructorId',verifyJWT,(req:Request, res, next) => instructorController.getAssignmentByInstructorId(req,res,next))
-       
+        router.get('/getAssignmentsByInstructorId',verifyJWT,(req:Request, res, next) => instructorController.getAssignmentByInstructorId(req,res,next))
+        router.post('/createQuestion',verifyJWT,(req,res,next)=>instructorController.createQuestion(req,res,next))
+        router.post('/liveClass',verifyJWT,(req,res,next)=>instructorController.createLiveClass(req,res,next))
+        router.put('/change-password',verifyJWT,instructorController.changePassword.bind(instructorController))
+
         return router
 }

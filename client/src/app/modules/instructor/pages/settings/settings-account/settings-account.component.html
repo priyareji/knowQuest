@@ -1,0 +1,41 @@
+<div fxLayout="column" fxLayoutAlign="start">
+  <h2>Account</h2>
+  <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+    <mat-label>Email</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+    </div>
+    <h2>Change Password</h2>
+    <mat-label>Current Password</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="password" formControlName="currentPassword" />
+      </mat-form-field>
+    </div>
+    <mat-label>Enter New Password</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="password" formControlName="newPassword" />
+      </mat-form-field>
+    </div>
+    <mat-label>Re-enter New Password</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="password" formControlName="confirmNewPassword" />
+      </mat-form-field>
+    </div>
+    <div>
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="end"
+        fxFlex="100"
+        fxFlex.gt-sm="40%"
+      >
+        <button mat-raised-button color="primary" type="submit">Update</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="space-between center"></div>

@@ -1,0 +1,84 @@
+<div class="student-sub-header">
+  <h2>Home</h2>
+</div>
+<div class="content-container home-student-common">
+  <h2>Your Subjects</h2>
+  <div class="mt-n-2" fxLayout="column" class="rounded">
+    <div fxLayout="row wrap" fxLayoutAlign="start" class="p-2 px-md-3">
+      <div
+        class="subject-container"
+        *ngFor="let subject of profile?.subjects; let i = index"
+      >
+        <div
+          class="subject-banner"
+          [ngStyle]="{
+            'background-image':
+              'url(' +
+              '../../../../../assets/images/illustrations/subject-banners/' +
+              ((i + 1) % 5) +
+              '.svg' +
+              ')'
+          }"
+        >
+          <h2>{{ subject.subjectName }}</h2>
+        </div>
+        <div class="p-2">
+          <span class="mat-caption"
+            >{{ subject.progress / 100 | percent }}Complete</span
+          >
+          <mat-progress-bar mode="determinate" [value]="subject.progress">
+          </mat-progress-bar>
+          <div fxLayoutAlign="center">
+            <button
+              mat-raised-button
+              class="btn"
+              [routerLink]="['/student', 'subject', subject.subjectId]"
+              routerLinkActive="router-link-active"
+              [ngStyle]="{ 'background-color': bgButtonColors[i % 5] }"
+            >
+              {{ subject.progress > 0 ? "Resume" : "Start" }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div  fxFlex="100" fxFlex.gt-sm="20%" class="border">
+
+    <div class="dumy-imgetwo"><h2 class="hed-color p-3">Subject 1</h2></div>
+    <div class="p-2">
+        <span>10% Complete</span>
+        <img src="../../../../../assets/images/dummy/Frame 59.png">
+        <div  fxLayoutAlign="center" >
+          <button mat-raised-button class="btn-start-color btn-colortw">Start</button>
+        </div>
+    </div>
+    </div>
+
+    <div  fxFlex="100" fxFlex.gt-sm="20%" class="border">
+
+    <div class="dumy-imgeth"><h2 class="hed-color p-3">Subject 1</h2></div>
+    <div class="p-2">
+        <span>10% Complete</span>
+        <img src="../../../../../assets/images/dummy/Frame 59.png">
+        <div  fxLayoutAlign="center" >
+          <button mat-raised-button class="btn-start-color btn-colorth">Start</button>
+        </div>
+    </div>
+    </div>
+
+      <div fxFlex="100" fxFlex.gt-sm="20%" class="border">
+
+        <div class="dumy-imgef">
+          <h2 class="hed-color p-3">Subject 1</h2>
+        </div>
+        <div class="p-2">
+          <span>10% Complete</span>
+          <img src="../../../../../assets/images/dummy/Frame 59.png">
+          <div fxLayoutAlign="center">
+            <button mat-raised-button class="btn-start-color btn-colorf">Start</button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

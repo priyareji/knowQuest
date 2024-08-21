@@ -1,12 +1,29 @@
 import { Assignment, IAssignment } from "../models/Assignment";
 import { Book, BookDocument } from "../models/Book";
 import { Chapter, IChapter } from "../models/Chapter";
+import { Instructor } from "../models/Instructor";
+import { ILiveClass, LiveClass } from "../models/LiveClass";
+import { IQuestions, Questions } from "../models/Question";
 import { ISection, Section, SectionDocument } from "../models/Section";
 import { IUnit,Unit } from "../models/Unit"
 import { IVideo, Video } from "../models/Video";
+import { IINSTRUCTOR } from "../types/model/IUser.interface";
 
 export class InstructorRepository{
 
+
+async findByEmail(email:string){
+  const instructor = await Instructor.findOne({email}).exec()
+  return instructor
+}
+
+async updatePassword(email:string,hashedPassword:string){
+  return Instructor.findOneAndUpdate(
+    { email },
+    { $set: { password: hashedPassword } }, 
+    { new: true } 
+  );
+}
 
   async createUnit(unitData:Partial<IUnit>):Promise<IUnit>{
     const unit =new Unit(unitData)
@@ -66,6 +83,29 @@ async createAssignment(assignment:IAssignment):Promise<IAssignment>{
     throw new Error(`Error creating in assignment`);
   }
 }
+async createQuestion(question:IQuestions):Promise<IQuestions>{
+  try{
+  return await Questions.create(question)
+  }
+  catch(error){
+    throw new Error(`Error creating in assignment`);
+  }
+}
+
+async createLiveClass(liveUpdate:ILiveClass):Promise<ILiveClass>{
+  try{
+  return await LiveClass.create(liveUpdate)
+  }
+  catch(error){
+    throw new Error(`Error creating in assignment`);
+  }
+}
+
+
+
+
+
+
 
 }
 

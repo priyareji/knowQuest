@@ -4,26 +4,62 @@
 
 <div fxLayout="column" class="p-3">
   <mat-form-field>
+    <mat-label>Select Subject</mat-label>
+    <mat-select [(ngModel)]="subject">
+      <mat-option *ngFor="let subject of subjectDetails" [value]="subject"
+        >{{ subject.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
     <mat-label>Select Question Type</mat-label>
-    <mat-select>
-      <mat-option value="option1">One Word</mat-option>
-      <mat-option value="option2">Multiple Choice</mat-option>
-      <mat-option value="option3">Essay</mat-option>
+    <mat-select [(ngModel)]="createdQuestion.questionType">
+      <mat-option value="one word">One Word</mat-option>
+      <mat-option value="multiple choice">Multiple Choice</mat-option>
+      <mat-option value="essay">Essay</mat-option>
     </mat-select>
   </mat-form-field>
   <div fxLayout="column">
     <mat-form-field>
       <mat-label>Enter Question</mat-label>
-      <input matInput />
+      <input [(ngModel)]="createdQuestion.question" matInput />
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="14px">
     <mat-form-field>
       <mat-label>Mark</mat-label>
-      <input matInput />
+      <input [(ngModel)]="createdQuestion.mark" matInput />
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="14px">
-    <button mat-stroked-button color="accent">Add Question</button>
+    <button mat-stroked-button color="accent" (click)="AddQuestion()">
+      Add Ques tion
+    </button>
+  </div>
+  <div class="my-2" fxLayout="column">
+    <div
+      class="p-2 my-1 border rounded"
+      *ngFor="let question of createdQuestions; let i = index"
+    >
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="gappx"
+      >
+        <h3>Qn {{ i + 1 }}. {{ question.question }}</h3>
+        <a (click)="deleteQuestion(i)">Remove</a>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <button
+      [disabled]="createdQuestions.length == 0"
+      mat-flat-button
+      color="accent"
+      (click)="onCreate()"
+    >
+      Submit
+    </button>
   </div>
 </div>

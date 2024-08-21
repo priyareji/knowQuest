@@ -15,6 +15,13 @@ import { InstructorViewAllAssignmentComponent } from './pages/instructor-view-al
 import { InstructorViewAssignmentComponent } from './pages/instructor-view-assignment/instructor-view-assignment.component';
 import { PrepareQuestionsComponent } from './pages/prepare-questions/prepare-questions.component';
 import { SetLiveClassComponent } from './pages/set-live-class/set-live-class.component';
+import { SettingsRootComponent } from './pages/settings/settings-root/settings-root.component';
+import { SettingsProfileViewComponent } from './pages/settings/settings-profile-view/settings-profile-view.component';
+import { SettingsAccountComponent } from './pages/settings/settings-account/settings-account.component';
+import { SettingsProfileEditComponent } from './pages/settings/settings-profile-edit/settings-profile-edit.component';
+import { MessageRootComponent } from 'src/app/shared/pages/messages/message-root/message-root.component';
+import { ComposeMessageComponent } from 'src/app/shared/pages/messages/compose-message/compose-message.component';
+import { ViewMessagesComponent } from 'src/app/shared/pages/messages/view-messages/view-messages.component';
 
 
 const routes: Routes = [
@@ -65,6 +72,25 @@ children:[ {
   component: PrepareQuestionsComponent
 },
 {
+  path: 'messages',
+  component: MessageRootComponent,
+  children: [
+    {
+      path: '',
+      redirectTo: 'compose',
+      pathMatch: 'full',
+    },
+    {
+      path: 'compose',
+      component: ComposeMessageComponent,
+    },
+    {
+      path: ':commentId',
+      component: ViewMessagesComponent,
+    },
+  ],
+},
+{
   path: 'live-class',
   component: SetLiveClassComponent
 },
@@ -90,7 +116,33 @@ children:[ {
       component: InstructorViewAssignmentComponent
     }
   ]
-}
+},
+{
+  path: 'account',
+  component: SettingsRootComponent,
+  children: [
+    {
+      path: '',
+      redirectTo: 'profile',
+      pathMatch: 'full',
+    },
+    {
+      path: 'profile',
+      component: SettingsProfileViewComponent,
+    },
+    {
+      path: 'instructor-account',
+      component: SettingsAccountComponent,
+    },
+
+    {
+      path: 'profile-edit',
+      component: SettingsProfileEditComponent,
+    },
+  ],
+},
+
+
 ]
 }
 ];

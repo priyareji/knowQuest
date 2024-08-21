@@ -1,0 +1,19 @@
+.view-message {
+  background: #e2eeff;
+}
+@import "../../../../../styles/global/includes";
+.message-list-style {
+  height: 57vh;
+}
+p {
+  outline: none;
+  cursor: pointer;
+}
+.max-height-300 {
+  max-height: 300px;
+}
+@include media-breakpoint-down(sm) {
+  .remove-space-responsive {
+    margin-bottom: 0px !important;
+  }
+}

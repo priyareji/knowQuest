@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { Unit, UnitUpdate } from '../models/unit.model';
-import { Instructor } from '../models/instructor.model';
+import { changePassword, Instructor } from '../models/instructor.model';
 import { ApiResponse } from '../models/apiResponse';
 import { Chapter, ChapterUpdate } from '../models/chapter.model';
 import { Section, SectionUpdate } from '../models/section.model';
 import { BookUpdate } from '../models/book.model';
 import { VideoUpdate } from '../models/video.model';
 import { AssignmentUpdate } from '../models/assignment.model';
+import { questionUpdate } from '../models/question.model';
+import { liveClassUpdate } from '../models/liveClass.model';
 //import { AlertService } from './alert/alert.service';
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,10 @@ export class InstructorService {
   getProfileDetails(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.apiUrl}/instructor/profiledetails`);
   }
+changePassword(payload:changePassword){
+  return this.http.put<ApiResponse>(`${this.apiUrl}/instructor/change-password`,payload)
+}
+
   createUnit(unit:UnitUpdate){
     return this.http.post<ApiResponse>(`${this.apiUrl}/instructor/createUnit`,unit)
     .pipe(map((response:ApiResponse)=>{
@@ -212,6 +218,21 @@ createAssignment(assignmentUpdate: AssignmentUpdate) {
 
   return this.http.post(this.apiUrl + '/instructor/createAssignment', formData);
 }
+createQuestion(questions:questionUpdate){
+  return this.http.post<ApiResponse>(`${this.apiUrl}/instructor/createQuestion`,questions)
+  .pipe(map((response:ApiResponse)=>{
+    //   if(response.success)this.alertService.success(response.message);
+      return response.data
+     }))
+}
+
+createLiveClass(liveUpdate:liveClassUpdate){
+  return this.http.post<ApiResponse>(`${this.apiUrl}/instructor/LiveClass`,liveUpdate)
+  .pipe(map((response:ApiResponse)=>{
+    return response.data
+  }))
+}
+
 
 getAssignmentsByInstructorId(): Observable<ApiResponse>{
   return this.http
@@ -223,5 +244,7 @@ getAssignmentsByInstructorId(): Observable<ApiResponse>{
   //   })
  // );
 }
+
+
 
 }

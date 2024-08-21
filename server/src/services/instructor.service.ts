@@ -1,6 +1,8 @@
 import { IAssignment } from "../models/Assignment";
 import { BookDocument } from "../models/Book";
 import { IChapter } from "../models/Chapter";
+import { ILiveClass } from "../models/LiveClass";
+import { IQuestions } from "../models/Question";
 import { ISection, SectionDocument } from "../models/Section";
 import { IUnit, Unit } from "../models/Unit";
 import { IVideo } from "../models/Video";
@@ -59,5 +61,13 @@ export class InstructorService {
         // }
         return this.instructorRepository.createAssignment(assignment)
       }
+      async createQuestion(question:IQuestions):Promise<IQuestions>{
+        return this.instructorRepository.createQuestion(question)
+      }
+      async createLiveClass(liveUpdate:ILiveClass):Promise<ILiveClass>{
+        return this.instructorRepository.createLiveClass(liveUpdate)
+      }
+
+
 
 }

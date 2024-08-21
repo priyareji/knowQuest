@@ -1,0 +1,50 @@
+<div>
+  <div fxLayout="row " fxLayoutAlign="space-between">
+    <div fxFlex="100" fxFlex.gt-sm="90%">
+      <h2>Profile</h2>
+      <mat-label> Name</mat-label>
+      <div>
+        <span fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+          {{ userProfile?.name }}
+        </span>
+      </div>
+      <mat-label>Phone Number</mat-label>
+      <div>
+        <span fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+          {{ userProfile?.phonenumber }}
+        </span>
+      </div>
+      <mat-label>Email</mat-label>
+      <div>
+        <span fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+          {{ userProfile?.email }}</span
+        >
+      </div>
+      <!-- <mat-label>DOB</mat-label>
+      <div>
+        <span fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+          03-09-2000
+        </span>
+      </div> -->
+      <!-- <mat-label>Address</mat-label>
+      <div>
+        <span
+          fxFlex="100"
+          fxFlex.gt-sm="40%"
+          appearance="outline"
+          class="address-span"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+          hendrerit elit turpis, a porttitor tellus sollicitudin at.Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit
+        </span>
+      </div> -->
+    </div>
+    <div fxFlex="100" fxFlex.gt-sm="5%">
+      <button [routerLink]="['/instructor', 'account', 'profile-edit']">
+        <mat-icon>create</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

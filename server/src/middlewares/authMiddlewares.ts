@@ -10,7 +10,7 @@ import HttpStatus from "../types/constants/http-statuscode";
 import { USER } from "../types/model/IUser.interface";
 //import { findAdminById } from "../repository/adminRepository";
 
- export const verifyJWT = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const verifyJWT = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
   const token =  req.cookies?.accessToken?.trim()   || req.header("authorization")?.replace("Bearer","").trim();
   console.log(token,"tokenn")
@@ -32,6 +32,12 @@ import { USER } from "../types/model/IUser.interface";
 
     if (!user) {
       user = await Student.findById(decodedToken.id).select("-password -refreshToken -emailVerificationToken -emailVerificationExpiry");
+   if(user?.isBlocked){
+    res.status(403).json({message:"Account is Blocked"})
+    return;
+  }
+  //  next();
+   
     }
         if (!user) throw new AppError("Invalid access tokennnn", HttpStatus.UNAUTHORIZED);
         req.user = user 
@@ -39,8 +45,9 @@ import { USER } from "../types/model/IUser.interface";
     } catch (error:any) {
             throw new AppError( error?.message || "Invalid access token",HttpStatus.UNAUTHORIZED);
     }
-})
 
+  
+})
 // export const verifyAdminJWT = asyncHandler(async (req:any, res: Response, next: NextFunction) => {
 //   const token =  req.cookies?.accessToken?.trim()   || req.header("authorization")?.replace("Bearer","").trim();
 //   if (!token) throw new AppError("Unauthorized request", HttpStatus.UNAUTHORIZED);

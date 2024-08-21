@@ -1,0 +1,49 @@
+<div
+  class="view-message rounded border-bottom p-2 mb-2"
+  [ngStyle]="{ 'background-color': conversationMode ? '#fff' : '#e2eeff' }"
+>
+  <!-- [ngClass]="{'border': !conversationMode}" -->
+  <div
+    *ngIf="isMessageFrom"
+    fxLayout="row"
+    fxLayoutAlign="start start"
+    fxLayoutGap="6px"
+  >
+    <!-- <div class="message-icon"></div> -->
+    <div fxFlex="95%" fxLayout="column">
+      <div *ngIf="conversationMode" fxLayout="column">
+        <p class="m-0 mat-caption">
+          {{ messageSender }}, {{ messageTime | date : "short" }}
+        </p>
+
+        <h3 class="mb-0">
+          {{ messageContent }}
+        </h3>
+      </div>
+
+      <div *ngIf="!conversationMode" fxLayout="column">
+        <h3 class="m-0 mat-caption">{{ messageFrom }}</h3>
+        <p class="cursor-pointer mb-0" [routerLink]="[conversationId]">
+          {{ messageSender }}: {{ messageContent | trimString : 80 }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!isMessageFrom"
+    fxLayout="row-reverse"
+    fxLayoutAlign="end start"
+    fxLayoutGap="6px"
+  >
+    <!-- <div class="message-icon"></div> -->
+    <div fxFlex="95%" fxLayout="column" fxLayoutAlign="end end">
+      <p class="m-0 mat-caption">
+        {{ messageSender }}, {{ messageTime | date : "short" }}
+      </p>
+      <h3 class="mb-0 text-right">
+        {{ messageContent }}
+      </h3>
+    </div>
+  </div>
+</div>

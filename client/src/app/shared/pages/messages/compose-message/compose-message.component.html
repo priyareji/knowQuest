@@ -1,0 +1,34 @@
+<div class="p-3 border">
+  <mat-label>Send To</mat-label>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-form-field fxFlex="100" appearance="outline">
+      <mat-label>Select Batch</mat-label>
+      <mat-select (selectionChange)="batchListChange($event)">
+        <mat-option> </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-form-field fxFlex="100" appearance="outline">
+      <mat-label>Select </mat-label>
+      <mat-select>
+        <mat-option> </mat-option>
+      </mat-select>
+      <mat-select (selectionChange)="instructorListChange($event)">
+        <mat-option>Name </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <mat-form-field fxFlex="100" appearance="outline">
+      <mat-label>Enter your message</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="end">
+    <button mat-raised-button color="primary" (click)="onClickSend()">
+      Send
+    </button>
+  </div>
+</div>

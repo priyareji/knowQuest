@@ -1,0 +1,47 @@
+<div>
+  <h2>Profile Edit</h2>
+  <form fxLayout="column" [formGroup]="editInstructorFormGroup">
+    <mat-label> Name</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+    </div>
+    <mat-label>Phone Number</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="number" formControlName="phonenumber" />
+      </mat-form-field>
+    </div>
+    <mat-label>Email</mat-label>
+    <div>
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+    </div>
+    <!-- <mat-label>DOB</mat-label>
+  <div>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+      <input matInput type="text" />
+    </mat-form-field>
+  </div>
+  <mat-label>Address</mat-label>
+  <div>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="40%" appearance="outline">
+      <textarea matInput type="text"></textarea>
+    </mat-form-field>
+  </div> -->
+    <div>
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="end"
+        fxFlex="100"
+        fxFlex.gt-sm="40%"
+      >
+        <button mat-raised-button color="primary" (click)="onUpdate()">
+          Update
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

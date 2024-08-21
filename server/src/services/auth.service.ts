@@ -53,7 +53,7 @@ const refreshToken = jwt.sign({ id: user._id, role: user.role }, configKey().REF
 }
 
 
-async logoutAdmin(userId: string): Promise<void>   {
+async logout(userId: string): Promise<void>   {
   await this.adminRepository.adminfindByIdAndUpdate(userId, {
     $set: {
       refreshAccessToken: undefined

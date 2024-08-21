@@ -18,6 +18,14 @@ import { InstructorViewAssignmentComponent } from './pages/instructor-view-assig
 import { InstructorViewAllAssignmentComponent } from './pages/instructor-view-all-assignment/instructor-view-all-assignment.component';
 import { PrepareQuestionsComponent } from './pages/prepare-questions/prepare-questions.component';
 import { SetLiveClassComponent } from './pages/set-live-class/set-live-class.component';
+import { SettingsRootComponent } from './pages/settings/settings-root/settings-root.component';
+import { SettingsProfileViewComponent } from './pages/settings/settings-profile-view/settings-profile-view.component';
+import { SettingsProfileEditComponent } from './pages/settings/settings-profile-edit/settings-profile-edit.component';
+import { SettingsAccountComponent } from './pages/settings/settings-account/settings-account.component';
+import { MessageRootComponent } from './pages/messages/message-root/message-root.component';
+import { ViewMessagesComponent } from './pages/messages/view-messages/view-messages.component';
+import { ComposeMessageComponent } from './pages/messages/compose-message/compose-message.component';
+import { MessageListComponent } from 'src/app/shared/components/message-list/message-list.component';
 
 
 
@@ -36,7 +44,15 @@ import { SetLiveClassComponent } from './pages/set-live-class/set-live-class.com
     InstructorViewAssignmentComponent,
     InstructorViewAllAssignmentComponent,
     PrepareQuestionsComponent,
-    SetLiveClassComponent
+    SetLiveClassComponent,
+    SettingsRootComponent,
+    SettingsProfileViewComponent,
+    SettingsProfileEditComponent,
+    SettingsAccountComponent,
+    MessageRootComponent,
+    ViewMessagesComponent,
+    ComposeMessageComponent,
+    //MessageListComponent
   ],
   imports: [
     CommonModule,SharedModule,FormsModule,ReactiveFormsModule,InstructorRoutingModule,FlexLayoutModule

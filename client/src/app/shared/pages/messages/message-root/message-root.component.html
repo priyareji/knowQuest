@@ -1,0 +1,47 @@
+<div class="content-container">
+  <div class="form-card bg-white">
+    <div class=" ">
+      <div
+        fxLayout="row "
+        fxLayoutAlign="space-between center"
+        class="border p-2 mb-3 remove-space-responsive"
+      >
+        <div fxFlex="100" fxFlex.gt-sm="70%">
+          <h2 class="m-0">Comments ({{ conversations.length }})</h2>
+        </div>
+
+        <button mat-stroked-button [routerLink]="['compose']" color="accent">
+          New Comment
+        </button>
+      </div>
+
+      <mat-card-content>
+        <div
+          fxLayout="row wrap"
+          fxLayoutAlign="space-between start"
+          fxLayoutGap="2%"
+        >
+          <div
+            fxFlex="100"
+            fxFlex.gt-sm="40%"
+            class="p-3 border content-container max-height-300 card-margin-responsiveness"
+          >
+            <app-message-list
+              *ngFor="let conversation of conversations"
+              [messageSender]="conversation.from"
+              [messageContent]="conversation.content"
+              [messageTime]="conversation.time"
+              [messageFrom]="conversation.messageFrom"
+              [conversationId]="conversation._id"
+            ></app-message-list>
+
+            <h3 *ngIf="conversations.length == 0">No comments added yet</h3>
+          </div>
+          <div fxFlex="100" fxFlex.gt-sm>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

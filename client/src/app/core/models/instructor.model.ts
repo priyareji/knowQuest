@@ -11,3 +11,9 @@ batch:string,
 mode:string,
 subjects:string[]
 }
+export interface changePassword{
+  email:string,
+currentpassword:string,
+newPassword:string
+
+}

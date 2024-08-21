@@ -1,0 +1,58 @@
+<div class="vh-90">
+  <mat-toolbar class="bg-white">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="logo-container"></div>
+      <div fxLayout="row">
+        <div
+          fxShow="true"
+          fxHide.lt-md
+          fxLayoutGap="14px"
+          fxLayoutAlign="space-between"
+        >
+          <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+          <a (click)="onClickLink('home')" class="header-link">Home</a>
+          <a class="header-link" (click)="onClickLink('messages')">Message</a>
+          <a class="header-link">Assignment</a>
+
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="position">account_circle</mat-icon>
+            <span class="ml-1">StudentName</span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Account Settings</button>
+            <mat-divider> </mat-divider>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </div>
+        <button
+          mat-icon-button
+          (click)="sidenav.toggle()"
+          fxShow="true"
+          fxHide.gt-sm
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" mat-list-item>Close</a>
+        <a class="header-link" mat-list-item (click)="onClickLink('home')"
+          >Home</a
+        >
+        <a class="header-link" mat-list-item (click)="onClickLink('messages')"
+          >Message</a
+        >
+        <a class="header-link" mat-list-item>Assignment</a>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon class="position">account_circle</mat-icon>
+          <span class="ml-1">StudentNaame</span>
+        </button>
+      </mat-nav-list>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</div>

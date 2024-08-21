@@ -1,0 +1,51 @@
+<div>
+  <div class="student-sub-header">
+    <h2>Account</h2>
+  </div>
+  <div class="content-container">
+    <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <div fxFlex="100" fxFlex.gt-sm="19%">
+          <div
+            fxLayout="column"
+            fxLayoutAlign="space-between center"
+            fxLayoutGap="10px"
+            class="border"
+          >
+            <div class="common-account-bg"></div>
+
+            <div>
+              <button
+                mat-raised-button
+                [routerLink]="['/instructor', 'account', 'profile']"
+              >
+                Profile
+              </button>
+            </div>
+            <div>
+              <button
+                mat-raised-button
+                [routerLink]="['/instructor', 'account', 'instructor-account']"
+              >
+                My Account
+              </button>
+            </div>
+
+            <div class="mb-5"></div>
+            <div class="mb-5"></div>
+            <div class="mb-5"></div>
+            <div class="mb-5"></div>
+
+            <!-- <div  fxLayoutGap="20px" class="mb-5">
+            <button mat-raised-button color="accent">Sign out</button>
+          </div> -->
+          </div>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="79%" fxLayoutGap="14px">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<div></div>

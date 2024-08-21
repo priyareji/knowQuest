@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler"
 import { AuthService } from "../services/auth.service";
 import HttpStatus from "../types/constants/http-statuscode";
 import ApiResponse from "../utils/ApiResponse";
+import { USER } from "../types/model/IUser.interface";
 
 export class AuthController{
   private authService: AuthService;
@@ -31,9 +32,11 @@ export class AuthController{
 
  async logoutadmin(req: Request, res: Response, next: NextFunction)  {
   console.log("req",req.user)
-  // const _id = req.user?._id;
-  // await logoutAdmin(_id);
-
+  
+  const user = req.user as USER; // Type assertion
+        console.log("reqqq", user?._id?.toString()); 
+        const id=user?._id?.toString()
+     //  await this.authService.logout(id);
   res.status(HttpStatus.OK).json(new ApiResponse(HttpStatus.OK, {}, "User logout successfully"));
 };
 }

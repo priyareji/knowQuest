@@ -9,7 +9,9 @@
             <span class="ml-1">{{ this.profileDetails?.name }}</span>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>Account Settings</button>
+            <button mat-menu-item [routerLink]="['/instructor', 'account']">
+              Account Settings
+            </button>
             <mat-divider> </mat-divider>
             <button mat-menu-item (click)="logout()">Logout</button>
           </mat-menu>

@@ -1,0 +1,29 @@
+.subject-container {
+  width: 280px;
+  border: solid 1px #e4e0e4;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem;
+  transition: .2s;
+  h2 {
+    padding: 1rem;
+    color: #fff;
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .subject-banner {
+    height: 102px;
+  }
+  .btn {
+    line-height: 2;
+    color: white;
+    margin: 10px;
+    min-width: 100px;
+    padding: 2px 0px;
+  }
+}
+
+.subject-container:hover{
+  box-shadow: 10px 10px 20px #cccccc,
+            -20px -20px 30px #edffff;
+}
